@@ -8,8 +8,8 @@ void CObject::Update() {
 }
 
 void CObject::Render() {
-	for (int i = 0; m_components.size(); i++) {
+	for (int i = 0; i < m_components.size(); i++) {
 		std::cout << "CObject Render()" << std::endl;
-		//m_components[i]->Render();
+		m_components[i]->Render();
 	}
 }
