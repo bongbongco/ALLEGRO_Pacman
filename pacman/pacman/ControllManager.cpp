@@ -1,8 +1,8 @@
 #include "ControllManager.h"
 
 void CControllManager::HandleEvent(ALLEGRO_EVENT _event) {
-	
-	for (int i = 0; i < m_listeners.size(); i++) {
+	int i = 0;
+//	for (int i = 0; i < m_listeners.size(); i++) {
 		switch (_event.keyboard.keycode) {
 		case ALLEGRO_KEY_W: // À§·Î 
 			std::cout << "W" << std::endl;
@@ -21,6 +21,6 @@ void CControllManager::HandleEvent(ALLEGRO_EVENT _event) {
 			m_listeners[i]->Right();
 			break;
 		}
-	}
+	//}
 
 }

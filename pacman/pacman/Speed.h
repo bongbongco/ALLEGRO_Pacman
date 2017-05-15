@@ -13,7 +13,5 @@ public:
 	}
 
 	virtual void Update() {}
-	virtual void Render() {
-		std::cout << "Speed Render()" << std::endl;
-	}
+	virtual void Render() {}
 };

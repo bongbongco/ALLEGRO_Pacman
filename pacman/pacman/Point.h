@@ -8,7 +8,5 @@ public:
 	}
 
 	virtual void Update() {}
-	virtual void Render() {
-		std::cout << "Point Render()" << std::endl;
-	}
+	virtual void Render() {}
 };

@@ -39,9 +39,7 @@ public:
 	void Stun();
 
 	virtual void Update();
-	virtual void Render() {
-		std::cout << "Ghost Render();" << std::endl;
-	}
+	virtual void Render() {}
 
 	virtual void Up() {
 		m_direction = N;

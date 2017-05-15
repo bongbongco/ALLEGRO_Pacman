@@ -6,7 +6,5 @@ public:
 	CCollision(CObject *_object) : CComponent(_object) {}
 
 	virtual void Update() {}
-	virtual void Render() {
-		std::cout << "Component Render()" << std::endl;
-	}
+	virtual void Render() {}
 };

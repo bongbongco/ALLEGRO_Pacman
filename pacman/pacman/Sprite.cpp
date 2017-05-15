@@ -13,9 +13,8 @@ void CSprite::Update() {
 
 void CSprite::Render() {
 	if (m_bitmap) {
-		std::cout << "Sprite Render();" << std::endl;
 		CTransform *transform = this->GetObject()->GetTransform();
 		al_draw_bitmap(m_bitmap, transform->x, transform->y, 0);
-		al_flip_display();
+		//al_flip_display();
 	}
 }

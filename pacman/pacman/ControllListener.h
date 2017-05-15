@@ -2,10 +2,10 @@
 
 class CControllListener {
 public:
-	virtual void Up() {}
-	virtual void Down() {}
-	virtual void Left() {}
-	virtual void Right() {}
+	virtual void Up() = 0;
+	virtual void Down() = 0;
+	virtual void Left() = 0;
+	virtual void Right() = 0;
 
 	virtual ~CControllListener() {}
 };

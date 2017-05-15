@@ -104,7 +104,6 @@ void CSceneManager::Render() {
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
 	for (int i = 0; i < m_objects.size(); i++) {
-		std::cout << "CSceneManager Render()" << std::endl;
 		m_objects[i]->Render();
 	}
 
