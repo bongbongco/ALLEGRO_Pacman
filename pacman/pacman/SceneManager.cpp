@@ -61,7 +61,7 @@ void CSceneManager::Init() {
 			m_objects.push_back(ghostManager);
 			m_ghosts.push_back(ghost);
 
-			if (al_init_image_addon()) {
+			if (al_init_image_addon()) { //
 				ALLEGRO_BITMAP *ghostImage = gImageManager.GetImage("ghost.png");
 				ghostManager->AddCompont<CSprite>()->SetSprite(ghostImage);
 
@@ -76,6 +76,21 @@ void CSceneManager::Init() {
 	catch(std::string _exception) {
 		std::cout << _exception << std::endl;
 	}
+
+	CObject *speedManager = new CObject();
+	speedManager->AddCompont<CSpeed>();
+	ALLEGRO_BITMAP *speedImage = gImageManager.GetImage("cherry.png");
+	speedManager->AddCompont<CSprite>()->SetSprite(speedImage);
+	speedManager->GetTransform()->x = 16;
+	speedManager->GetTransform()->y = 55;
+	m_objects.push_back(speedManager);
+
+	speedManager = new CObject();
+	speedManager->AddCompont<CSpeed>();
+	speedManager->GetComponent<CSprite>()->SetSprite(speedImage);
+	speedManager->GetTransform()->x = kDisplayWidth/2;
+	speedManager->GetTransform()->y = 174;
+	m_objects.push_back(speedManager);
 }
 
 void CSceneManager::Update() {
