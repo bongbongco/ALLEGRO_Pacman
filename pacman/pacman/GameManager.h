@@ -22,6 +22,8 @@ private:
 	ALLEGRO_TIMEOUT m_timeout;
 	bool m_whatHappen;
 public:
+	CSceneManager m_sceneManager;
+
 	CGameManager():kAllegroInitError("Allegro 초기화 실패"),
 		kAllegroCreateDisplayError("Allegro Display 생성 실패"),
 		kAllegroCreateEventQueueError("Allegro Event 생성 실패"),
@@ -36,5 +38,7 @@ public:
 
 	void Init();
 	void Play();
-
+	CSceneManager *GetSceneManager() {
+		return &m_sceneManager;
+	}
 };

@@ -25,7 +25,7 @@ private:
 	ALLEGRO_BITMAP *m_pointImage;
 	ALLEGRO_BITMAP *m_pacmanImage;
 	CPacman *m_pacman;
-	//std::vector<CGhost*> m_ghosts;
+	std::vector<CGhost*> m_ghosts;
 public:
 	std::vector<CObject *> m_objects;
 	CSceneManager() :kAllegroImageInitError("Allegro 이미지 추가 기능 초기화 실패") {};

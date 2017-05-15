@@ -7,10 +7,13 @@ void CGhost::SetVector(std::vector<CObject *> *_object) {
 }
 
 int CGhost::Move(int _x, int _y) {
+	_x *= m_speedMod;
+	_y *= m_speedMod;
+	
 	CTransform *transform = this->GetObject()->GetTransform();
 
-	int x = transform->x + (_x * m_speedMod);
-	int y = transform->y + (_y * m_speedMod);
+	int x = transform->x + _x;
+	int y = transform->y + _y;
 
 	for (int i = 0; i < m_otherObject->size(); i++) {
 		if ((*m_otherObject)[i] == m_object) { // 비교할 객체가 동일할 경우 
@@ -45,13 +48,24 @@ int CGhost::Move(int _x, int _y) {
 
 			if (point && this->GetObject()->GetComponent<CPacman>()) {
 				CObject *pointManager = m_otherObject->at(i);
-				//gGameManager// 포인트 제거
+				gGameManager.GetSceneManager()->RemoveObject(pointManager);// 포인트 제거
 				m_score++;
 				std::cout << m_score << std::endl;
+			}
+
+			CSpeed *speed = m_otherObject->at(i)->GetComponent<CSpeed>();
+
+			if (speed) {
+				CObject *speedManager = m_otherObject->at(i);
+				gGameManager.GetSceneManager()->RemoveObject(speedManager);
+				Boost(speed);
 			}
 		}
 	}
 
+	transform->x += _x;
+	transform->y += _y;
+	return 1;
 }
 
 void CGhost::Stun() {

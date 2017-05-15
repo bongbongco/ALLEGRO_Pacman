@@ -3,6 +3,7 @@
 
 static CMapManager gMapManager;
 static CImageManager gImageManager;
+static CControllManager gControllManager;
 
 void CSceneManager::Init() {
 	std::cout << "SceneManager initialize" << std::endl;
@@ -55,7 +56,19 @@ void CSceneManager::Init() {
 
 		for (int i = 0; i < kGhostNumber; i++) {
 			CObject *ghostManager = new CObject();
-			
+			CGhost *ghost = ghostManager->AddCompont<CGhost>();
+			ghost->SetVector(&m_objects);
+			m_objects.push_back(ghostManager);
+			m_ghosts.push_back(ghost);
+
+			if (al_init_image_addon()) {
+				ALLEGRO_BITMAP *ghostImage = gImageManager.GetImage("ghost.png");
+				ghostManager->AddCompont<CSprite>()->SetSprite(ghostImage);
+
+				ghostManager->GetTransform()->x = kDisplayWidth / 2 + i * 50;
+				ghostManager->GetTransform()->y = kDisplayHeight / 2;
+			}
+			gControllManager.RegisterListener(ghost);
 		}
 
 
