@@ -1,4 +1,9 @@
 #include "GameManager.h"
+#include "Common.h"
+#include "ControllManager.h"
+#include <iostream>
+#include <string>
+#include "allegro5\allegro.h"
 
 static CSceneManager gSceneManager;
 static CControllManager gControllManager;
@@ -37,7 +42,7 @@ void CGameManager::Init() {
 	al_register_event_source(m_eventQueue, al_get_timer_event_source(m_timer)); // 타이머 이벤트 소스를 이벤트 큐에 등록
 	al_register_event_source(m_eventQueue, al_get_keyboard_event_source()); // 키보드 이벤트 소스를 이벤트 큐에 등록
 
-	al_clear_to_color(al_map_rgb(0, 255, 0)); // 기존 화면 제거 후, 검정색으로 화면 설정 준비
+	al_clear_to_color(al_map_rgb(0, 0, 0)); // 기존 화면 제거 후, 검정색으로 화면 설정 준비
 	al_flip_display(); // 버퍼(검정색)에 있는 이미지 출력
 	al_start_timer(m_timer); // 타이머 시작
 
@@ -51,7 +56,7 @@ void CGameManager::Play() {
 
 		if (m_whatHappen) { // 이벤트 발생 시
 			if (m_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { // 창을 닫은 경우
-				al_clear_to_color(al_map_rgb(255, 0, 0));
+				al_clear_to_color(al_map_rgb(0, 0, 0));
 				al_flip_display();
 				al_rest(5.0);
 				break;

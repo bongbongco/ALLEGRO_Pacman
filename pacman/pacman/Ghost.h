@@ -5,7 +5,6 @@
 #include "Transform.h"
 #include "ControllListener.h"
 #include "Collision.h"
-#include "GameManager.h"
 #include "Pacman.h"
 #include "Speed.h"
 #include "Point.h"
@@ -40,7 +39,9 @@ public:
 	void Stun();
 
 	virtual void Update();
-	virtual void Render() {}
+	virtual void Render() {
+		std::cout << "Ghost Render();" << std::endl;
+	}
 
 	virtual void Up() {
 		m_direction = N;

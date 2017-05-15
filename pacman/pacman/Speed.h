@@ -1,6 +1,7 @@
 #pragma once
 #include "Common.h"
 #include "Component.h"
+#include <iostream>
 class CSpeed : public CComponent{
 public:
 	int m_speed;
@@ -12,5 +13,7 @@ public:
 	}
 
 	virtual void Update() {}
-	virtual void Render() {}
+	virtual void Render() {
+		std::cout << "Speed Render()" << std::endl;
+	}
 };

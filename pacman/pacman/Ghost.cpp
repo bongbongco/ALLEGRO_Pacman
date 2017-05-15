@@ -1,4 +1,5 @@
 #include "Ghost.h"
+#include "GameManager.h"
 
 static CGameManager gGameManager;
 
@@ -35,7 +36,7 @@ int CGhost::Move(int _x, int _y) {
 				if (pacman) { // 팩맨과의 충돌이었다면
 					ALLEGRO_BITMAP *pacmanImage = pacman->GetSprite();
 					(*m_otherObject)[i]->RemoveComponent<CPacman>(pacman);
-					m_object->AddCompont<CPacman>()->SetSprite(pacmanImage);
+					m_object->AddComponent<CPacman>()->SetSprite(pacmanImage);
 
 					CGhost *otherGhost = (*m_otherObject)[i]->GetComponent<CGhost>();
 					if (otherGhost) {

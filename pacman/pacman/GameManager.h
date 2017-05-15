@@ -1,13 +1,17 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include "allegro5\allegro.h"
-#include "Common.h"
+
+
 #include "SceneManager.h"
-#include "ControllManager.h"
+
+
+
 
 class CGameManager {
 private:
+	// 제거 예정
+	CGameManager(CGameManager const&);// 제거 예정
+	void operator=(CGameManager const&);// 제거 예정
+
 	const std::string kAllegroInitError;
 	const std::string kAllegroCreateDisplayError;
 	const std::string kAllegroCreateEventQueueError;
@@ -34,7 +38,7 @@ public:
 		m_display = NULL;
 		m_eventQueue = NULL;
 		m_timer = NULL;
-	};
+	}
 
 	void Init();
 	void Play();

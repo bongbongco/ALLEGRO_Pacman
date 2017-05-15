@@ -11,7 +11,7 @@ private:
 	CTransform *m_transform;
 public:
 	CObject() {
-		m_transform = AddCompont<CTransform>();
+		m_transform = AddComponent<CTransform>();
 	}
 
 	~CObject() {
@@ -27,7 +27,7 @@ public:
 	void Update();
 	void Render();
 
-	template <class T> T* AddCompont() {
+	template <class T> T* AddComponent() {
 		T *component = new T(this);
 		m_components.push_back(component);
 		return component;
