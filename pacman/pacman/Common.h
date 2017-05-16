@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include <string>
 
 enum Direction {N, S, W, E};
 const int kDisplayWidth = 960; // È­¸é °¡·Î Æø

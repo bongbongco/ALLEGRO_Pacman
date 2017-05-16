@@ -65,10 +65,6 @@ int CPika::Move(int _x, int _y) {
 
 void CPika::Stun() {
 	m_stunFrames = kStunDuration;
-	CObject *pikaManager = new CObject();
-	CPika *pika = pikaManager->GetComponent<CPika>();
-	ALLEGRO_BITMAP *stunPikaImage = CImageManager::Instance().GetImage("zzz.png");
-	pikaManager->AddComponent<CSprite>()->SetSprite(stunPikaImage);
 }
 
 void CPika::Boost(CSpeed *_speed) {
@@ -88,11 +84,6 @@ void CPika::Update() {
 		m_stunFrames--; // 스턴 중일 경우 스턴 기간 감소 
 	}
 	else { // 스턴 중이 아닐 경우 움직임
-		CObject *pikaManager = new CObject();
-		CPika *pika = pikaManager->GetComponent<CPika>();
-		ALLEGRO_BITMAP *stunPikaImage = CImageManager::Instance().GetImage("zzz.png");
-		pikaManager->AddComponent<CSprite>()->SetSprite(stunPikaImage);
-
 		switch (m_direction) {
 		case N:
 			Move(0, -1);

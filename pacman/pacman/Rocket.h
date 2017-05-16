@@ -4,11 +4,14 @@
 #include "Transform.h"
 #include "Object.h"
 #include "Sprite.h"
+#include "Solid.h"
 
-
-class CRocket : public CSprite {
+class CRocket : public CComponent {//, public CSprite {
+private:
+	Direction m_direction;
+	int m_label;
 public : 
-	CRocket(CObject *_object) : CSprite(_object) {
+	CRocket(CObject *_object) : CComponent(_object) { //, CSprite(_object) {
 		CTransform *transform = GetObject()->GetTransform();
 		if (transform->x == 0) {
 			transform->x = kDisplayWidth / 2 - 8;
@@ -18,7 +21,16 @@ public :
 		}
 	}
 
-	virtual void Update() {}
-	//virtual void Render() {}
+	virtual void Update();
+	virtual void Render() {}
+	void SetLabel(int _label) {
+		m_label = _label;
+	}
+
+	int GetLabel() {
+		return m_label;
+	}
+
+	void Move(int _x, int _y);
 };
 

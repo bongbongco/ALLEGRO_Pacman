@@ -49,6 +49,7 @@ void CSceneManager::Init() {
 
 				CObject *rocketManager = new CObject;
 				CRocket *rocket = rocketManager->AddComponent<CRocket>();
+				rocket->SetLabel(i);
 				
 				rocketImage = CImageManager::Instance().GetImage("team_rocket.png");
 				rocket->SetSprite(rocketImage);
