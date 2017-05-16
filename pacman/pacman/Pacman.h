@@ -9,7 +9,7 @@
 class CPacman : public CSprite {
 public : 
 	CPacman(CObject *_object) : CSprite(_object) {
-		CTransform *transform = this->GetObject()->GetTransform();
+		CTransform *transform = GetObject()->GetTransform();
 		if (transform->x == 0) {
 			transform->x = kDisplayWidth / 2 - 8;
 		}

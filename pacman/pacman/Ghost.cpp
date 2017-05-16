@@ -1,7 +1,6 @@
 #include "Ghost.h"
 #include "GameManager.h"
 
-static CGameManager gGameManager;
 
 void CGhost::SetVector(std::vector<CObject *> *_object) {
 	m_otherObject = _object;
@@ -11,7 +10,7 @@ int CGhost::Move(int _x, int _y) {
 	_x *= m_speedMod;
 	_y *= m_speedMod;
 	
-	CTransform *transform = this->GetObject()->GetTransform();
+	CTransform *transform = GetObject()->GetTransform();
 
 	int x = transform->x + _x;
 	int y = transform->y + _y;
@@ -47,9 +46,9 @@ int CGhost::Move(int _x, int _y) {
 
 			CPoint *point = m_otherObject->at(i)->GetComponent<CPoint>();
 
-			if (point && this->GetObject()->GetComponent<CPacman>()) {
+			if (point && GetObject()->GetComponent<CPacman>()) {
 				CObject *pointManager = m_otherObject->at(i);
-				gGameManager.GetSceneManager()->RemoveObject(pointManager);// 포인트 제거
+				CGameManager::Instance().GetSceneManager()->RemoveObject(pointManager);// 포인트 제거
 				m_score++;
 				std::cout << m_score << std::endl;
 			}
@@ -58,7 +57,7 @@ int CGhost::Move(int _x, int _y) {
 
 			if (speed) {
 				CObject *speedManager = m_otherObject->at(i);
-				gGameManager.GetSceneManager()->RemoveObject(speedManager);
+				CGameManager::Instance().GetSceneManager()->RemoveObject(speedManager);
 				Boost(speed);
 			}
 		}
@@ -79,7 +78,7 @@ void CGhost::Boost(CSpeed *_speed) {
 }
 
 void CGhost::Update() {
-	CTransform *transform = this->GetObject()->GetTransform();
+	CTransform *transform = GetObject()->GetTransform();
 
 	m_speedBoostFrames--;
 	if (m_speedBoostFrames <= 0) { // 부스터 모드 종료

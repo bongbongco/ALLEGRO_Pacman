@@ -22,8 +22,6 @@ public:
 	}
 
 	virtual void Update() {}
-	virtual void Render() {
- 		//al_draw_filled_rectangle(x, y, x + kTileWidth, y + kTileHeight, al_map_rgb(0, 255, 0));
-		//al_flip_display();                               
+	virtual void Render() {                          
 	}
 };
