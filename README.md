@@ -1,2 +1,2 @@
-# SDL_Pacman
-SDL Pacman
+# ALLEGRO_Pacman
+ALLEGRO Pacman
