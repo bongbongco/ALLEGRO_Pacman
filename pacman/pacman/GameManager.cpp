@@ -55,9 +55,6 @@ void CGameManager::Play() {
 
 		if (m_whatHappen) { // 이벤트 발생 시
 			if (m_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { // 창을 닫은 경우
-				al_clear_to_color(al_map_rgb(0, 0, 0));
-				al_flip_display();
-				al_rest(5.0);
 				break;
 			}
 

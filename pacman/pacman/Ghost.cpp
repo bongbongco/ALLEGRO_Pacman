@@ -19,18 +19,18 @@ int CGhost::Move(int _x, int _y) {
 		if ((*m_otherObject)[i] == m_object) { // 비교할 객체가 동일할 경우 
 			continue;
 		}
-		CTransform * otherTransform = m_otherObject->at(i)->GetTransform();
+		CTransform *otherTransform = m_otherObject->at(i)->GetTransform();
 
-		if ((x + transform->x > otherTransform->x) &&
+		if ((x + transform->width > otherTransform->x) &&
 			(x < otherTransform->x + otherTransform->width) &&
-			(y + transform->y > otherTransform->y) &&
-			(y < otherTransform->y + otherTransform->height)
+			(y + transform->height > otherTransform->y) &&
+			(y < otherTransform->y + otherTransform->height) // 동일 좌표 위에 존재하는 객체 존재 시
 			) {
 
-			if ((*m_otherObject)[i]->GetComponent<CCollision>()) {
-				return 0;
+			if ((*m_otherObject)[i]->GetComponent<CSolid>()) {
+				return 0; // Wall, Point, Speed 
 			}
-			else { // 충돌이 있었다면
+			else { 
 				CPacman *pacman = (*m_otherObject)[i]->GetComponent<CPacman>();
 				if (pacman) { // 팩맨과의 충돌이었다면
 					ALLEGRO_BITMAP *pacmanImage = pacman->GetSprite();
@@ -65,6 +65,8 @@ int CGhost::Move(int _x, int _y) {
 
 	transform->x += _x;
 	transform->y += _y;
+	std::cout << "transform->x : " << transform->x + _x << std::endl;
+	std::cout << "transform->y" << transform->y + _y << std::endl;
 	return 1;
 }
 

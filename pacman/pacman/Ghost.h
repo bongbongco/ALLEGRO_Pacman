@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Transform.h"
 #include "ControllListener.h"
-#include "Collision.h"
+#include "Solid.h"
 #include "Pacman.h"
 #include "Speed.h"
 #include "Point.h"

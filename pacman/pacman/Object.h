@@ -45,8 +45,9 @@ public:
 
 	template <class T> T* GetComponent() {
 		for (int i = 0; i < m_components.size(); i++) {
-		if (typeid(*m_components[i]) == typeid(T)) { // 동일한 클래스인 컴포넌트
-			return dynamic_cast<T*>(m_components[i]);
+			if (typeid(*m_components[i]) == typeid(T)) { // 동일한 클래스인 컴포넌트
+				return dynamic_cast<T*>(m_components[i]);
+				//return (T*)m_components[i];
 			}
 		}
 		return nullptr;

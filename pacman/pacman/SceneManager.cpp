@@ -29,16 +29,16 @@ void CSceneManager::Init() {
 						tile->GetTransform()->x = j * al_get_bitmap_width(m_tileImage);
 
 						tile->AddComponent<CSprite>()->SetSprite(m_tileImage);
-						tile->AddComponent<CCollision>();
+						tile->AddComponent<CSolid>();
 						m_objects.push_back(tile);
 					}
 					else if (m_blueprint[i][j] == kPoint) {
 						CObject *point = new CObject();
 						point->GetTransform()->y = i * al_get_bitmap_height(m_pointImage);
-						point->GetTransform()->x = i * al_get_bitmap_width(m_pointImage);
+						point->GetTransform()->x = j * al_get_bitmap_width(m_pointImage);
 
 						point->AddComponent<CSprite>()->SetSprite(m_pointImage);
-						point->AddComponent<CCollision>();
+						point->AddComponent<CSolid>();
 						m_objects.push_back(point);
 					}
 				}
@@ -56,7 +56,7 @@ void CSceneManager::Init() {
 				m_objects.push_back(ghostManager);
 				m_ghosts.push_back(ghost);
 
-				m_ghostImage = CImageManager::Instance().GetImage("ghost.png");
+				m_ghostImage = CImageManager::Instance().GetImage("pikachu.png");
 				ghostManager->AddComponent<CSprite>()->SetSprite(m_ghostImage);
 
 				ghostManager->GetTransform()->x = kDisplayWidth / 2 + i * 50;

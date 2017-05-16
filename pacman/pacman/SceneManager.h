@@ -10,7 +10,7 @@
 #include "Object.h"
 #include "Transform.h"
 #include "Sprite.h"
-#include "Collision.h"
+#include "Solid.h"
 #include "Pacman.h"
 #include "Ghost.h"
 

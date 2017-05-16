@@ -80,9 +80,6 @@
     <ClInclude Include="Sprite.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Pacman.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -99,6 +96,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Solid.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
