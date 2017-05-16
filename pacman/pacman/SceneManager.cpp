@@ -5,8 +5,7 @@
 
 
 static CMapManager gMapManager;
-static CImageManager gImageManager;
-static CControllManager gControllManager;
+
 
 void CSceneManager::Init() {
 	ALLEGRO_BITMAP *m_tileImage;
@@ -19,8 +18,8 @@ void CSceneManager::Init() {
 		if (al_init_image_addon()) {// 이미지 추가 기능 초기화 
 			m_blueprint = gMapManager.LoadLevel("level1.txt"); // 설계도 생성
 
-			m_tileImage = gImageManager.GetImage("tile.png"); // 타일 이미지
-			m_pointImage = gImageManager.GetImage("point.png"); // 포인트 이미지
+			m_tileImage = CImageManager::Instance().GetImage("tile.png"); // 타일 이미지
+			m_pointImage = CImageManager::Instance().GetImage("point.png"); // 포인트 이미지
 
 			for (int i = 0; i < kTileY; i++) {
 				for (int j = 0; j < kTileX; j++) {
@@ -46,7 +45,7 @@ void CSceneManager::Init() {
 			}
 			CObject *pacmanManager = new CObject;
 			m_pacman = pacmanManager->AddComponent<CPacman>();
-			m_pacmanImage = gImageManager.GetImage("deadpac.png");
+			m_pacmanImage = CImageManager::Instance().GetImage("deadpac.png");
 			m_pacman->SetSprite(m_pacmanImage);
 			m_objects.push_back(pacmanManager);
 
@@ -57,18 +56,18 @@ void CSceneManager::Init() {
 				m_objects.push_back(ghostManager);
 				m_ghosts.push_back(ghost);
 
-				m_ghostImage = gImageManager.GetImage("ghost.png");
+				m_ghostImage = CImageManager::Instance().GetImage("ghost.png");
 				ghostManager->AddComponent<CSprite>()->SetSprite(m_ghostImage);
 
 				ghostManager->GetTransform()->x = kDisplayWidth / 2 + i * 50;
 				ghostManager->GetTransform()->y = kDisplayHeight / 2;
 
-				gControllManager.RegisterListener(ghost);
+				CControllManager::Instance().RegisterListener(ghost);
 			}
 
 			CObject *speedManager = new CObject();
 			speedManager->AddComponent<CSpeed>();
-			m_speedImage = gImageManager.GetImage("cherry.png");
+			m_speedImage = CImageManager::Instance().GetImage("cherry.png");
 			speedManager->AddComponent<CSprite>()->SetSprite(m_speedImage);
 			speedManager->GetTransform()->x = 16;
 			speedManager->GetTransform()->y = 55;

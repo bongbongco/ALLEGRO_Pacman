@@ -31,6 +31,11 @@ public:
 	std::vector<CObject *> m_objects;
 	CSceneManager() :kAllegroImageInitError("Allegro 이미지 추가 기능 초기화 실패") {};
 
+	static CSceneManager& Instance() {
+		static CSceneManager gInstance;
+		return gInstance;
+	}
+
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();

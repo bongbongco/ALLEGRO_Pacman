@@ -1,12 +1,13 @@
-﻿  ControllManager.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  SceneManager.cpp
+﻿  SceneManager.cpp
 e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-e:\포트폴리오\allegro_pacman\pacman\pacman\scenemanager.cpp(98): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-e:\포트폴리오\allegro_pacman\pacman\pacman\scenemanager.cpp(106): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+e:\포트폴리오\allegro_pacman\pacman\pacman\scenemanager.cpp(97): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+e:\포트폴리오\allegro_pacman\pacman\pacman\scenemanager.cpp(105): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Main.cpp
 e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  GameManager.cpp
+e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
   Ghost.cpp
 e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 e:\포트폴리오\allegro_pacman\pacman\pacman\ghost.cpp(19): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
@@ -22,8 +23,9 @@ e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(37): warning C4018: '<'
           [
               T=CPacman
           ]
-  GameManager.cpp
-e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   코드를 생성하고 있습니다...
+  건너뛰고 있습니다... (관련된 변경 내용 없음)
+  ImageManager.cpp
+  ControllManager.cpp
   pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.exe
   pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.pdb (Partial PDB)

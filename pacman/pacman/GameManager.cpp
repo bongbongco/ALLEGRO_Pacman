@@ -5,8 +5,7 @@
 #include <string>
 #include "allegro5\allegro.h"
 
-static CSceneManager gSceneManager;
-static CControllManager gControllManager;
+
 
 void CGameManager::Init() {
 	try {
@@ -46,7 +45,7 @@ void CGameManager::Init() {
 	al_flip_display(); // 버퍼(검정색)에 있는 이미지 출력
 	al_start_timer(m_timer); // 타이머 시작
 
-	gSceneManager.Init(); // SceneManager 초기화
+	CSceneManager::Instance().Init(); // SceneManager 초기화
 }
 
 void CGameManager::Play() {
@@ -63,12 +62,12 @@ void CGameManager::Play() {
 			}
 
 			if (m_event.type == ALLEGRO_EVENT_KEY_DOWN) { // 키를 누른 경우
-				gControllManager.HandleEvent(m_event);
+				CControllManager::Instance().HandleEvent(m_event);
 			}
 			
 			if (m_event.type == ALLEGRO_EVENT_TIMER) { // 화면 업데이트
-				gSceneManager.Update();
-				gSceneManager.Render();
+				CSceneManager::Instance().Update();
+				CSceneManager::Instance().Render();
 			}
 		}
 	}

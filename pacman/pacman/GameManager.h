@@ -24,6 +24,11 @@ private:
 public:
 	CSceneManager m_sceneManager;
 
+	static CGameManager& Instance() {
+		static CGameManager gInstance;
+		return gInstance;
+	}
+
 	CGameManager():kAllegroInitError("Allegro 초기화 실패"),
 		kAllegroCreateDisplayError("Allegro Display 생성 실패"),
 		kAllegroCreateEventQueueError("Allegro Event 생성 실패"),
