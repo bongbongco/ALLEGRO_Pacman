@@ -33,7 +33,6 @@ int CMapManager::DecodeScatch(char _scatch) {
 	case ' ':
 		return kEmpty;  // 공백
 	default:
-		std::cout << "잘못된 문자 존재(공백 처리) : " << _scatch << std::endl;
 		return kEmpty;
 	}
 }

@@ -146,7 +146,7 @@
   <ItemGroup>
     <ClCompile Include="ControllManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="Pika.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapManager.cpp" />
@@ -164,11 +164,11 @@
     <ClInclude Include="ControllListener.h" />
     <ClInclude Include="ControllManager.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="Ghost.h" />
+    <ClInclude Include="Pika.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="Pacman.h" />
+    <ClInclude Include="Rocket.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

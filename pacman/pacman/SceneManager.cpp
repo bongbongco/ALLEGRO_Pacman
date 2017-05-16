@@ -8,69 +8,75 @@ static CMapManager gMapManager;
 
 
 void CSceneManager::Init() {
-	ALLEGRO_BITMAP *m_tileImage;
-	ALLEGRO_BITMAP *m_pointImage;
-	ALLEGRO_BITMAP *m_pacmanImage;
-	ALLEGRO_BITMAP *m_ghostImage;
-	ALLEGRO_BITMAP *m_speedImage;
+	ALLEGRO_BITMAP *tileImage;
+	ALLEGRO_BITMAP *pointImage;
+	ALLEGRO_BITMAP *rocketImage;
+	ALLEGRO_BITMAP *pikaImage;
+	ALLEGRO_BITMAP *speedImage;
 	std::cout << "SceneManager initialize" << std::endl;
 	try {
 		if (al_init_image_addon()) {// 이미지 추가 기능 초기화 
 			m_blueprint = gMapManager.LoadLevel("level1.txt"); // 설계도 생성
 
-			m_tileImage = CImageManager::Instance().GetImage("tile.png"); // 타일 이미지
-			m_pointImage = CImageManager::Instance().GetImage("point.png"); // 포인트 이미지
+			tileImage = CImageManager::Instance().GetImage("puzzle.png"); // 타일 이미지
+			pointImage = CImageManager::Instance().GetImage("pokecoin.png"); // 포인트 이미지
 
 			for (int i = 0; i < kTileY; i++) {
 				for (int j = 0; j < kTileX; j++) {
 					if (m_blueprint[i][j] == kWall) {
 						CObject *tile = new CObject();
-						tile->GetTransform()->y = i * al_get_bitmap_height(m_tileImage);
-						tile->GetTransform()->x = j * al_get_bitmap_width(m_tileImage);
+						tile->GetTransform()->y = i * al_get_bitmap_height(tileImage);
+						tile->GetTransform()->x = j * al_get_bitmap_width(tileImage);
 
-						tile->AddComponent<CSprite>()->SetSprite(m_tileImage);
+						tile->AddComponent<CSprite>()->SetSprite(tileImage);
 						tile->AddComponent<CSolid>();
 						m_objects.push_back(tile);
 					}
 					else if (m_blueprint[i][j] == kPoint) {
-						CObject *point = new CObject();
-						point->GetTransform()->y = i * al_get_bitmap_height(m_pointImage);
-						point->GetTransform()->x = j * al_get_bitmap_width(m_pointImage);
-
-						point->AddComponent<CSprite>()->SetSprite(m_pointImage);
-						point->AddComponent<CSolid>();
-						m_objects.push_back(point);
+						CObject *pointManager = new CObject();
+						pointManager->AddComponent<CPoint>();
+						
+						pointManager->AddComponent<CSprite>()->SetSprite(pointImage);
+						pointManager->GetTransform()->y = i * al_get_bitmap_height(pointImage);
+						pointManager->GetTransform()->x = j * al_get_bitmap_width(pointImage);
+						m_objects.push_back(pointManager);
+						//point->AddComponent<CSolid>();
 					}
 				}
 			}
-			CObject *pacmanManager = new CObject;
-			m_pacman = pacmanManager->AddComponent<CPacman>();
-			m_pacmanImage = CImageManager::Instance().GetImage("deadpac.png");
-			m_pacman->SetSprite(m_pacmanImage);
-			m_objects.push_back(pacmanManager);
 
-			for (int i = 0; i < kGhostNumber; i++) {
-				CObject *ghostManager = new CObject();
-				CGhost *ghost = ghostManager->AddComponent<CGhost>();
-				ghost->SetVector(&m_objects);
-				m_objects.push_back(ghostManager);
-				m_ghosts.push_back(ghost);
+			for (int i = 1; i <= kRocketNumber; i++) {
 
-				m_ghostImage = CImageManager::Instance().GetImage("pikachu.png");
-				ghostManager->AddComponent<CSprite>()->SetSprite(m_ghostImage);
-
-				ghostManager->GetTransform()->x = kDisplayWidth / 2 + i * 50;
-				ghostManager->GetTransform()->y = kDisplayHeight / 2;
-
-				CControllManager::Instance().RegisterListener(ghost);
+				CObject *rocketManager = new CObject;
+				CRocket *rocket = rocketManager->AddComponent<CRocket>();
+				
+				rocketImage = CImageManager::Instance().GetImage("team_rocket.png");
+				rocket->SetSprite(rocketImage);
+				rocketManager->GetTransform()->x = kDisplayWidth / 5 + i * 128;
+				rocketManager->GetTransform()->y = 64;
+				m_objects.push_back(rocketManager);
 			}
+
+			CObject *pikaManager = new CObject();
+			m_pika = pikaManager->AddComponent<CPika>();
+			m_pika->SetVector(&m_objects);
+			m_objects.push_back(pikaManager);
+
+			pikaImage = CImageManager::Instance().GetImage("pikachu.png");
+			pikaManager->AddComponent<CSprite>()->SetSprite(pikaImage);
+
+			pikaManager->GetTransform()->x = kDisplayWidth / 2;
+			pikaManager->GetTransform()->y = kDisplayHeight / 2;
+
+			CControllManager::Instance().RegisterListener(m_pika);
+			
 
 			CObject *speedManager = new CObject();
 			speedManager->AddComponent<CSpeed>();
-			m_speedImage = CImageManager::Instance().GetImage("cherry.png");
-			speedManager->AddComponent<CSprite>()->SetSprite(m_speedImage);
-			speedManager->GetTransform()->x = 16;
-			speedManager->GetTransform()->y = 55;
+			speedImage = CImageManager::Instance().GetImage("razz-berry.png");
+			speedManager->AddComponent<CSprite>()->SetSprite(speedImage);
+			speedManager->GetTransform()->x = 64;
+			speedManager->GetTransform()->y = 64;
 			m_objects.push_back(speedManager);
 		}
 		else {

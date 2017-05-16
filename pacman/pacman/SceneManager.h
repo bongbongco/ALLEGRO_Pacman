@@ -11,22 +11,17 @@
 #include "Transform.h"
 #include "Sprite.h"
 #include "Solid.h"
-#include "Pacman.h"
-#include "Ghost.h"
+#include "Rocket.h"
+#include "Pika.h"
 
 
 class CSceneManager : public CScene {
 private:
 	const std::string kAllegroImageInitError;
 	int **m_blueprint;
-/*	ALLEGRO_BITMAP *m_tileImage;
-	ALLEGRO_BITMAP *m_pointImage;
-	ALLEGRO_BITMAP *m_pacmanImage;
-	ALLEGRO_BITMAP *m_ghostImage;
-	ALLEGRO_BITMAP *m_speedImage;
-	*/
-	CPacman *m_pacman;
-	std::vector<CGhost *> m_ghosts;
+
+	CPika *m_pika;
+	std::vector<CRocket *> m_rockets;
 public:
 	std::vector<CObject *> m_objects;
 	CSceneManager() :kAllegroImageInitError("Allegro 이미지 추가 기능 초기화 실패") {};
