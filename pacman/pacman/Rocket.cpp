@@ -37,15 +37,6 @@ int CRocket::Move(int _x, int _y) {
 void CRocket::Update() {
 	CTransform *transform = GetObject()->GetTransform();
 	// 길찾기 로직 추가
-	if (m_label == 1) {
-		m_direction = W;
-	}
-	else if (m_label == 2) {
-		m_direction = S;
-	}
-	else if (m_label == 3) {
-		m_direction = E;
-	}
 	switch (m_direction) {
 	case N:
 		Move(0, -1);

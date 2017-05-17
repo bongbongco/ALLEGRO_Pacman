@@ -2,6 +2,8 @@
 #include "GameManager.h"
 
 
+
+
 void CPika::SetVector(std::vector<CObject *> *_object) {
 	m_otherObject = _object;
 }
@@ -38,13 +40,14 @@ int CPika::Move(int _x, int _y) {
 			}
 
 			CPoint *point = m_otherObject->at(i)->GetComponent<CPoint>();
-
+			
 			if(point) {
 				CObject *pointManager = m_otherObject->at(i);
 				CGameManager::Instance().GetSceneManager()->RemoveObject(pointManager); // 포인트 제거
 				m_otherObject->erase(m_otherObject->begin() + i);
-				m_score++;
-				std::cout << m_score << std::endl;
+				m_score += 10;
+				//SetText(m_score);
+				
 			}
 
 			CSpeed *speed = m_otherObject->at(i)->GetComponent<CSpeed>();

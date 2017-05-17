@@ -11,7 +11,10 @@
 #include "Point.h"
 #include <vector>
 #include <iostream>
+#include <string>
 #include "allegro5\allegro_image.h"
+#include "allegro5\allegro_font.h"
+#include "allegro5\allegro_ttf.h"
 
 
 class CPika : public CComponent, public CControllListener {
@@ -20,11 +23,11 @@ private:
 	int m_speedMod;
 	int m_speedBoostFrames;
 	std::vector<CObject *> *m_otherObject;
+
 public:
 	int m_score;
 	Direction m_direction;
-
-	//std::vector<CObject *> *m_otherObject;
+	
 
 	CPika(CObject *_object) : CComponent(_object) {
 		m_speedMod = 1;

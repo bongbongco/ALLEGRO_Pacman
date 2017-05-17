@@ -9,7 +9,7 @@
 
 
 class CRocket : public CComponent {//, public CSprite {
-private:
+private:                                                                                                                    
 	Direction m_direction;
 	int m_label;
 	std::vector<CObject *> *m_otherObject;

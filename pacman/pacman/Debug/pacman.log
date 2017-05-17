@@ -1,11 +1,12 @@
-﻿  Rocket.cpp
+﻿  SceneManager.cpp
 e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-e:\포트폴리오\allegro_pacman\pacman\pacman\rocket.cpp(14): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+e:\포트폴리오\allegro_pacman\pacman\pacman\scenemanager.cpp(101): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+e:\포트폴리오\allegro_pacman\pacman\pacman\scenemanager.cpp(109): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(47): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  e:\포트폴리오\allegro_pacman\pacman\pacman\rocket.cpp(26): note: 컴파일 중인 함수 템플릿 인스턴스화 'T *CObject::GetComponent<CSolid>(void)'에 대한 참조를 확인하십시오.
+  e:\포트폴리오\allegro_pacman\pacman\pacman\scenemanager.cpp(69): note: 컴파일 중인 함수 템플릿 인스턴스화 'T *CObject::GetComponent<CSprite>(void)'에 대한 참조를 확인하십시오.
           with
           [
-              T=CSolid
+              T=CSprite
           ]
   pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.exe
   pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.pdb (Partial PDB)

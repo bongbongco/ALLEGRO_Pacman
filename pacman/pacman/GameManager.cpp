@@ -6,7 +6,6 @@
 #include "allegro5\allegro.h"
 
 
-
 void CGameManager::Init() {
 	try {
 		if (!al_init()) { // Allegro 초기화
@@ -31,6 +30,8 @@ void CGameManager::Init() {
 		if (!al_install_keyboard()) { // 키보드 드라이버 설치
 			throw;
 		}
+		al_init_font_addon(); // 폰트 기능
+		al_init_ttf_addon(); // 트루 타입 폰트 기능
 	}
 	catch (std::string _exception) {
 		std::cout << _exception << std::endl;

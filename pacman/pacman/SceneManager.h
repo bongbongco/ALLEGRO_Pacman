@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "allegro5\allegro_font.h"
+#include "allegro5\allegro_ttf.h"
 #include "allegro5\allegro_image.h"
 #include "allegro5\allegro.h"
 #include "Scene.h"
@@ -22,9 +24,10 @@ private:
 
 	CPika *m_pika;
 	std::vector<CRocket *> m_rockets;
+	std::vector<const char *> m_rocketImageName;
 public:
 	std::vector<CObject *> m_objects;
-	CSceneManager() :kAllegroImageInitError("Allegro 이미지 추가 기능 초기화 실패") {};
+	CSceneManager() :kAllegroImageInitError("Allegro 이미지 추가 기능 초기화 실패") {}
 
 	static CSceneManager& Instance() {
 		static CSceneManager gInstance;
