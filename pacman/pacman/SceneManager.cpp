@@ -4,9 +4,6 @@
 #include "ImageManager.h"
 
 
-static CMapManager gMapManager;
-
-
 void CSceneManager::Init() {
 	ALLEGRO_BITMAP *tileImage;
 	ALLEGRO_BITMAP *pointImage;
@@ -16,7 +13,7 @@ void CSceneManager::Init() {
 	std::cout << "SceneManager initialize" << std::endl;
 	try {
 		if (al_init_image_addon()) {// 이미지 추가 기능 초기화 
-			m_blueprint = gMapManager.LoadLevel("level1.txt"); // 설계도 생성
+			m_blueprint = CMapManager::Instance().LoadLevel("level1.txt"); // 설계도 생성
 
 			tileImage = CImageManager::Instance().GetImage("puzzle.png"); // 타일 이미지
 			pointImage = CImageManager::Instance().GetImage("pokecoin.png"); // 포인트 이미지
@@ -40,7 +37,6 @@ void CSceneManager::Init() {
 						pointManager->GetTransform()->y = i * al_get_bitmap_height(pointImage);
 						pointManager->GetTransform()->x = j * al_get_bitmap_width(pointImage);
 						m_objects.push_back(pointManager);
-						//point->AddComponent<CSolid>();
 					}
 				}
 			}
@@ -50,9 +46,10 @@ void CSceneManager::Init() {
 				CObject *rocketManager = new CObject;
 				CRocket *rocket = rocketManager->AddComponent<CRocket>();
 				rocket->SetLabel(i);
+				rocket->SetVector(&m_objects);
 				
 				rocketImage = CImageManager::Instance().GetImage("team_rocket.png");
-				rocket->SetSprite(rocketImage);
+				rocketManager->AddComponent<CSprite>()->SetSprite(rocketImage);
 				rocketManager->GetTransform()->x = kDisplayWidth / 5 + i * 128;
 				rocketManager->GetTransform()->y = 64;
 				m_objects.push_back(rocketManager);

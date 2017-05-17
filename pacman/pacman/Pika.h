@@ -19,12 +19,12 @@ private:
 	int m_stunFrames;
 	int m_speedMod;
 	int m_speedBoostFrames;
-
+	std::vector<CObject *> *m_otherObject;
 public:
 	int m_score;
 	Direction m_direction;
 
-	std::vector<CObject *> *m_otherObject;
+	//std::vector<CObject *> *m_otherObject;
 
 	CPika(CObject *_object) : CComponent(_object) {
 		m_speedMod = 1;
@@ -37,6 +37,7 @@ public:
 	
 	int Move(int _x, int _y);
 	void SetVector(std::vector<CObject *> *_objects);
+
 	void Boost(CSpeed *_speed);
 	void Stun();
 

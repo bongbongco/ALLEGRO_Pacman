@@ -1,6 +1,11 @@
 #include "Rocket.h"
 
-void CRocket::Move(int _x, int _y) {
+
+void CRocket::SetVector(std::vector<CObject *> *_object) {
+	m_otherObject = _object;
+}
+
+int CRocket::Move(int _x, int _y) {
 	CTransform *transform = GetObject()->GetTransform();
 
 	int x = transform->x + _x;
@@ -21,26 +26,6 @@ void CRocket::Move(int _x, int _y) {
 			if ((*m_otherObject)[i]->GetComponent<CSolid>()) {
 				return 0; // 벽
 			}
-
-
-			CPoint *point = m_otherObject->at(i)->GetComponent<CPoint>();
-
-			if (point) {
-				CObject *pointManager = m_otherObject->at(i);
-				CGameManager::Instance().GetSceneManager()->RemoveObject(pointManager); // 포인트 제거
-				m_otherObject->erase(m_otherObject->begin() + i);
-				m_score++;
-				std::cout << m_score << std::endl;
-			}
-
-			CSpeed *speed = m_otherObject->at(i)->GetComponent<CSpeed>();
-
-			if (speed) {
-				CObject *speedManager = m_otherObject->at(i);
-				CGameManager::Instance().GetSceneManager()->RemoveObject(speedManager); // 스피드 업 제거
-				m_otherObject->erase(m_otherObject->begin() + i);
-				Boost(speed);
-			}
 		}
 	}
 
@@ -52,6 +37,15 @@ void CRocket::Move(int _x, int _y) {
 void CRocket::Update() {
 	CTransform *transform = GetObject()->GetTransform();
 	// 길찾기 로직 추가
+	if (m_label == 1) {
+		m_direction = W;
+	}
+	else if (m_label == 2) {
+		m_direction = S;
+	}
+	else if (m_label == 3) {
+		m_direction = E;
+	}
 	switch (m_direction) {
 	case N:
 		Move(0, -1);

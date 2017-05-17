@@ -11,6 +11,11 @@ private:
 	char m_tmp[kTileX + 1];
 	int **m_blueprint;
 public:
+	static CMapManager& Instance() {
+		static CMapManager gInstance;
+		return gInstance;
+	}
+
 	int** LoadLevel(const char *_mapFilePath);
 	int DecodeScatch(char _scatch);
 };
