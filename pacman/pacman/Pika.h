@@ -23,7 +23,8 @@ private:
 	int m_speedMod;
 	int m_speedBoostFrames;
 	std::vector<CObject *> *m_otherObject;
-
+	bool m_stunFlag;
+	bool m_boostFlag;
 public:
 	int m_score;
 	Direction m_direction;
@@ -36,12 +37,15 @@ public:
 		m_score = 0;
 		m_stunFrames = 0;
 		m_direction = E;
+		m_boostFlag = false;
+		m_stunFlag = false;
 	}
 	
 	int Move(int _x, int _y);
 	void SetVector(std::vector<CObject *> *_objects);
 
-	void Boost(CSpeed *_speed);
+	void StateUpdate(State _state);
+	void Boost();
 	void Stun();
 
 	virtual void Update();

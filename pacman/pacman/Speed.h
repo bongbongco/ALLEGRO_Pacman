@@ -12,6 +12,10 @@ public:
 		m_duration = kBoostDuration;
 	}
 
+	int GetSpeed() {
+		return m_speed;
+	}
+
 	virtual void Update() {}
 	virtual void Render() {}
 };

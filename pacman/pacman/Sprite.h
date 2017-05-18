@@ -9,6 +9,8 @@
 
 
 class CSprite : public CComponent {
+private:
+	int m_score;
 public :
 	const char *m_text;
 	ALLEGRO_FONT *m_font = al_load_ttf_font("font.ttf", 24, ALLEGRO_TTF_NO_KERNING);
@@ -17,13 +19,14 @@ public :
 	CSprite(CObject *_object) : CComponent(_object) {
 		m_bitmap = NULL;
 		m_text = "0";
+		m_score = 0;
 	}
 
 	void SetSprite(ALLEGRO_BITMAP *_bitmap);
 	ALLEGRO_BITMAP *GetSprite();
 	
-	void SetText(std::string _text);
-	void SetText(int _text);
+	void SetScore(int _score);
+	void SetText(const char *_text);
 
 	virtual void Update();
 	virtual void Render();

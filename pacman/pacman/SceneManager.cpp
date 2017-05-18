@@ -53,6 +53,7 @@ void CSceneManager::Init() {
 				rocket->SetVector(&m_objects);
 				
 				rocketImage = CImageManager::Instance().GetImage(m_rocketImageName.at(i-1));
+				al_convert_mask_to_alpha(rocketImage, al_map_rgb(255, 255, 255));
 				rocketManager->AddComponent<CSprite>()->SetSprite(rocketImage);
 				rocketManager->GetTransform()->x = kDisplayWidth / 5 + i * 128;
 				rocketManager->GetTransform()->y = 64;
@@ -66,7 +67,7 @@ void CSceneManager::Init() {
 
 			pikaImage = CImageManager::Instance().GetImage("pikachu.png");
 			pikaManager->AddComponent<CSprite>()->SetSprite(pikaImage);
-			pikaManager->GetComponent<CSprite>()->SetText("198591");
+			pikaManager->GetComponent<CSprite>()->SetText("Player");
 			pikaManager->GetTransform()->x = kDisplayWidth / 2;
 			pikaManager->GetTransform()->y = kDisplayHeight / 2;
 
