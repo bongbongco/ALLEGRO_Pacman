@@ -1,11 +1,4 @@
-﻿  Pika.cpp
-e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-e:\포트폴리오\allegro_pacman\pacman\pacman\pika.cpp(19): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-e:\포트폴리오\allegro_pacman\pacman\pacman\object.h(47): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  e:\포트폴리오\allegro_pacman\pacman\pacman\pika.cpp(31): note: 컴파일 중인 함수 템플릿 인스턴스화 'T *CObject::GetComponent<CSolid>(void)'에 대한 참조를 확인하십시오.
-          with
-          [
-              T=CSolid
-          ]
-  pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.exe
-  pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.pdb (Partial PDB)
+﻿  MapManager.cpp
+MapManager.obj : error LNK2001: "private: static class CNode * CNode::gOpenList" (?gOpenList@CNode@@0PAV1@A) 외부 기호를 확인할 수 없습니다.
+MapManager.obj : error LNK2001: "private: static class CNode * (* CNode::gCloseList)[17]" (?gCloseList@CNode@@0PAY0BB@PAV1@A) 외부 기호를 확인할 수 없습니다.
+E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.exe : fatal error LNK1120: 2개의 확인할 수 없는 외부 참조입니다.

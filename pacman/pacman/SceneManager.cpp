@@ -23,7 +23,7 @@ void CSceneManager::Init() {
 			tileImage = CImageManager::Instance().GetImage("puzzle.png"); // 타일 이미지
 			pointImage = CImageManager::Instance().GetImage("pokecoin.png"); // 포인트 이미지
 
-			for (int i = 0; i < kTileY; i++) { // 맵 생성
+			for (int i = 0; i < kTileY; i++) { // 맵 생성. i 는 y축, j는 x축
 				for (int j = 0; j < kTileX; j++) {
 					if (m_blueprint[i][j] == kWall) { // 벽
 						CObject *tile = new CObject();
