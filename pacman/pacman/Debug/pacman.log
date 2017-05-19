@@ -1,4 +1,2 @@
-﻿  MapManager.cpp
-MapManager.obj : error LNK2001: "private: static class CNode * CNode::gOpenList" (?gOpenList@CNode@@0PAV1@A) 외부 기호를 확인할 수 없습니다.
-MapManager.obj : error LNK2001: "private: static class CNode * (* CNode::gCloseList)[17]" (?gCloseList@CNode@@0PAY0BB@PAV1@A) 외부 기호를 확인할 수 없습니다.
-E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.exe : fatal error LNK1120: 2개의 확인할 수 없는 외부 참조입니다.
+﻿  pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.exe
+  pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.pdb (Partial PDB)

@@ -2,7 +2,6 @@
 #include "GameManager.h"
 
 
-
 void CPika::SetVector(std::vector<CObject *> *_object) {
 	m_otherObject = _object;
 }
@@ -62,16 +61,17 @@ int CPika::Move(int _x, int _y) {
 
 	transform->x += _x;
 	transform->y += _y;
-	return 1;
+SetDirectionRocket(transform->x, transform->y);
+return 1;
 }
 
 void CPika::StateUpdate(State _state) {
-		ALLEGRO_BITMAP *slideAnimation = al_load_bitmap((_state==ZZZ) ? "slide2.png":"slide1.png");
-		for (int i = 1088; i > -544;) {
-			al_draw_bitmap(slideAnimation, i, 0, 0);
-			al_flip_display();
-			i -= 26;
-		}
+	ALLEGRO_BITMAP *slideAnimation = al_load_bitmap((_state == ZZZ) ? "slide2.png" : "slide1.png");
+	for (int i = 1088; i > -544;) {
+		al_draw_bitmap(slideAnimation, i, 0, 0);
+		al_flip_display();
+		i -= 26;
+	}
 }
 
 void CPika::Stun() {
@@ -158,4 +158,17 @@ void CPika::Update() {
 			transform->y = kDisplayHeight;
 		}
 	}
+}
+
+void CPika::SetDirectionRocket(int _x, int _y) {
+	for(int i = 0;  m_otherObject->size(); i++){
+		CRocket *rocket = (*m_otherObject)[i]->GetComponent<CRocket>();
+		if (rocket) {
+			
+			CNode *result = CNode::Instance().FindPath((*m_otherObject)[i]->GetTransform()->x, (*m_otherObject)[i]->GetTransform()->y, _x, _y);
+			//rocket->SetDirection();
+			int j =0;
+		}
+	}
+	
 }

@@ -7,7 +7,7 @@
 #include <algorithm>
 
 class CNode {
-private:
+public:
 	int m_startX, m_startY, m_endX, m_endY;
 
 	CNode *m_parent; // 부모의 노드
@@ -16,10 +16,12 @@ private:
 	int m_g; // 출발점부터 현재 노드까지 이동 비용
 	int m_h; // 현재 노트부터 목적지까지 이동 비용
 	const int kMax = 1000;
-	static CNode gOpenList[1000];
-	//CMapManager *m_closeList[kTileX + 1][kTileHeight + 1];
-	static CNode *gCloseList[kTileY + 1][kTileX + 1];
-public:
+
+	static CNode& Instance() {
+		static CNode gInstance;
+		return gInstance;
+	}
+
 	CNode *FindPath(int _startX, int _startY, int _endX, int _endY, bool _first = false);
 	CNode *MinimumF(); // OpenList 최소 F 값
 	bool EmptyCheck(); // OpenList empty check

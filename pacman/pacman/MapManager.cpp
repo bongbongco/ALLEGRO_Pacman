@@ -37,10 +37,20 @@ int CMapManager::DecodeScatch(char _scatch) {
 	}
 }
 
+static CNode gOpenList[1000];
+static CNode *gCloseList[kTileY + 1][kTileX + 1];
+
 CNode *CNode::FindPath(int _startX, int _startY, int _endX, int _endY, bool _first) {
+
+
 	if (_first == true) { // ½ÃÀÛÁ¡
 
 		CNode *newNode = new CNode;
+
+		_startX = _startX/kTileWidth;
+		_startY = _startY / kTileHeight;
+		_endX = _endX / kTileWidth;
+		_endY = _endY / kTileHeight;
 
 		m_startX = _startX;
 		m_startY = _startY;
@@ -55,7 +65,7 @@ CNode *CNode::FindPath(int _startX, int _startY, int _endX, int _endY, bool _fir
 		newNode->m_x = _startX;
 		newNode->m_y = _startY;
 
-		gOpenList[0].m_f = m_f;
+		gOpenList[0].m_f = newNode->m_f;
 		gOpenList[0].m_parent = newNode;
 	}
 

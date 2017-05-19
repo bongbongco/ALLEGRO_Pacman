@@ -5,6 +5,10 @@ void CRocket::SetVector(std::vector<CObject *> *_object) {
 	m_otherObject = _object;
 }
 
+void CRocket::SetDirection(Direction _direction) {
+	m_direction = _direction;
+}
+
 int CRocket::Move(int _x, int _y) {
 	CTransform *transform = GetObject()->GetTransform();
 
@@ -36,7 +40,8 @@ int CRocket::Move(int _x, int _y) {
 
 void CRocket::Update() {
 	CTransform *transform = GetObject()->GetTransform();
-	// 길찾기 로직 추가
+
+
 	switch (m_direction) {
 	case N:
 		Move(0, -1);

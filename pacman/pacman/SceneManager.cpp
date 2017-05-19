@@ -55,8 +55,12 @@ void CSceneManager::Init() {
 				rocketImage = CImageManager::Instance().GetImage(m_rocketImageName.at(i-1));
 				al_convert_mask_to_alpha(rocketImage, al_map_rgb(255, 255, 255));
 				rocketManager->AddComponent<CSprite>()->SetSprite(rocketImage);
+				
 				rocketManager->GetTransform()->x = kDisplayWidth / 5 + i * 128;
 				rocketManager->GetTransform()->y = 64;
+
+				CNode *result = CNode::Instance().FindPath(rocketManager->GetTransform()->x, 
+					rocketManager->GetTransform()->y, kDisplayWidth/2, kDisplayHeight/2, true);
 				m_objects.push_back(rocketManager);
 			}
 

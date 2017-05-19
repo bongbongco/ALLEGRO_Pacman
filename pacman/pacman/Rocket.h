@@ -8,26 +8,17 @@
 #include "Pika.h"
 
 
-class CRocket : public CComponent {//, public CSprite {
+class CRocket : public CComponent {
 private:                                                                                                                    
 	Direction m_direction;
 	int m_label;
 	std::vector<CObject *> *m_otherObject;
 public : 
-	CRocket(CObject *_object) : CComponent(_object) { //, CSprite(_object) {
+	CRocket(CObject *_object) : CComponent(_object) {
 		
-		/*
-		CTransform *transform = GetObject()->GetTransform();
-
-		if (transform->x == 0) {
-			transform->x = kDisplayWidth / 2 - 8;
-		}
-		if (transform->y == 0) {
-			transform->y = kDisplayHeight / 2 + 8;
-		}
-		*/
 	}
 	void SetVector(std::vector<CObject *> *_objects);
+	void SetDirection(Direction _direction);
 
 	virtual void Update();
 	virtual void Render() {}

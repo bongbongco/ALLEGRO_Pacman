@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "ControllListener.h"
 #include "ImageManager.h"
+#include "MapManager.h"
 #include "Solid.h"
 #include "Rocket.h"
 #include "Speed.h"
@@ -47,6 +48,8 @@ public:
 	void StateUpdate(State _state);
 	void Boost();
 	void Stun();
+
+	void SetDirectionRocket(int _x, int _y);
 
 	virtual void Update();
 	virtual void Render() {}
