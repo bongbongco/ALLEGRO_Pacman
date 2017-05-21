@@ -1,4 +1,48 @@
-﻿  코드를 생성하고 있습니다.
+﻿  ControllManager.cpp
+ControllManager.cpp(5): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  GameManager.cpp
+c:\git\allegro_pacman\pacman\pacman\Object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Node.cpp
+  Pika.cpp
+c:\git\allegro_pacman\pacman\pacman\Object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+Pika.cpp(23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+Pika.cpp(173): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\git\allegro_pacman\pacman\pacman\Object.h(47): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Pika.cpp(35): note: 컴파일 중인 함수 템플릿 인스턴스화 'T *CObject::GetComponent<CSolid>(void)'에 대한 참조를 확인하십시오.
+          with
+          [
+              T=CSolid
+          ]
+  ImageManager.cpp
+  Main.cpp
+c:\git\allegro_pacman\pacman\pacman\Object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  MapManager.cpp
+  Object.cpp
+c:\git\allegro_pacman\pacman\pacman\Object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+Object.cpp(5): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+Object.cpp(11): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Rocket.cpp
+c:\git\allegro_pacman\pacman\pacman\Object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+Rocket.cpp(67): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\git\allegro_pacman\pacman\pacman\Object.h(47): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Rocket.cpp(79): note: 컴파일 중인 함수 템플릿 인스턴스화 'T *CObject::GetComponent<CSolid>(void)'에 대한 참조를 확인하십시오.
+          with
+          [
+              T=CSolid
+          ]
+  SceneManager.cpp
+c:\git\allegro_pacman\pacman\pacman\Object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+SceneManager.cpp(108): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+SceneManager.cpp(118): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\git\allegro_pacman\pacman\pacman\Object.h(47): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  SceneManager.cpp(76): note: 컴파일 중인 함수 템플릿 인스턴스화 'T *CObject::GetComponent<CSprite>(void)'에 대한 참조를 확인하십시오.
+          with
+          [
+              T=CSprite
+          ]
+  Sprite.cpp
+c:\git\allegro_pacman\pacman\pacman\Object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  코드를 생성하고 있습니다.
   All 710 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   코드를 생성했습니다.
   pacman.vcxproj -> C:\git\ALLEGRO_Pacman\pacman\Release\pacman.exe
