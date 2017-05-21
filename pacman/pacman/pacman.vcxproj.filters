@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="asset">
-      <UniqueIdentifier>{9c1463d5-fe7e-4568-ac81-9d663e9cb3cf}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -110,5 +107,76 @@
     <ClInclude Include="Node.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\cat.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\gameover.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\intro.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\pikachu.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\pocketball.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\pokecoin.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\puzzle.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\razz-berry.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\rosa.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\roy.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\slide1.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\slide2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\speed.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\zzz.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="icon1.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\pika-pacman.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\icon1.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resource\font.ttf">
+      <Filter>리소스 파일</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resource\level1.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="pacman.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

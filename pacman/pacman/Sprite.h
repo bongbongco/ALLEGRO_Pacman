@@ -14,7 +14,7 @@ private:
 	int m_life;
 public :
 	const char *m_text;
-	ALLEGRO_FONT *m_font = al_load_ttf_font("font.ttf", 24, ALLEGRO_TTF_NO_KERNING);
+	ALLEGRO_FONT *m_font = al_load_ttf_font("resource/font.ttf", 24, ALLEGRO_TTF_NO_KERNING);
 	ALLEGRO_BITMAP *m_bitmap;
 
 	CSprite(CObject *_object) : CComponent(_object) {

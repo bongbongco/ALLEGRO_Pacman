@@ -49,7 +49,7 @@ void CGameManager::Init() {
 	CSceneManager::Instance().Init(); // SceneManager √ ±‚»≠
 }
 void CGameManager::Intro() {
-	ALLEGRO_BITMAP *gameintroImage = al_load_bitmap("intro.png");
+	ALLEGRO_BITMAP *gameintroImage = al_load_bitmap("resource/intro.png");
 	al_draw_bitmap(gameintroImage, 0, 0, 0);
 	al_flip_display();
 	while (true) {
@@ -86,7 +86,7 @@ void CGameManager::Play() {
 }
 
 void CGameManager::End() {
-	ALLEGRO_BITMAP *gameoverImage = al_load_bitmap("gameover.png");
+	ALLEGRO_BITMAP *gameoverImage = al_load_bitmap("resource/gameover.png");
 	al_draw_bitmap(gameoverImage, 0, 0, 0);
 	al_flip_display();
 	al_rest(5.0);

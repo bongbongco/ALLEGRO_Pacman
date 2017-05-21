@@ -166,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Node.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Solid.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Component.h" />
@@ -183,6 +184,34 @@
     <ClInclude Include="Speed.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
+    <Image Include="resource\cat.png" />
+    <Image Include="resource\gameover.png" />
+    <Image Include="resource\icon1.ico" />
+    <Image Include="resource\intro.png" />
+    <Image Include="resource\pika-pacman.ico" />
+    <Image Include="resource\pikachu.png" />
+    <Image Include="resource\pocketball.png" />
+    <Image Include="resource\pokecoin.png" />
+    <Image Include="resource\puzzle.png" />
+    <Image Include="resource\razz-berry.png" />
+    <Image Include="resource\rosa.png" />
+    <Image Include="resource\roy.png" />
+    <Image Include="resource\slide1.png" />
+    <Image Include="resource\slide2.png" />
+    <Image Include="resource\speed.png" />
+    <Image Include="resource\zzz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resource\font.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resource\level1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="pacman.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

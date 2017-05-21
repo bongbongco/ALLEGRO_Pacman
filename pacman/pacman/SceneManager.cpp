@@ -12,17 +12,17 @@ void CSceneManager::Init() {
 	ALLEGRO_BITMAP *pikaImage;
 	ALLEGRO_BITMAP *speedImage;
 
-	m_rocketImageName.push_back("rosa.png"); // 로켓단 - 로사
-	m_rocketImageName.push_back("roy.png"); // 로켓단 - 로이
-	m_rocketImageName.push_back("cat.png"); // 로켓단 - 고양이
+	m_rocketImageName.push_back("resource/rosa.png"); // 로켓단 - 로사
+	m_rocketImageName.push_back("resource/roy.png"); // 로켓단 - 로이
+	m_rocketImageName.push_back("resource/cat.png"); // 로켓단 - 고양이
 
 	try {
 		if (al_init_image_addon()) {// 이미지 추가 기능 초기화 
-			m_blueprint = CMapManager::Instance().LoadLevel("level1.txt"); // 설계도 생성
+			m_blueprint = CMapManager::Instance().LoadLevel("resource/level1.txt"); // 설계도 생성
 			CNode::Instance().SetBlueprint(m_blueprint); // 길 찾기를 위해 노드 객체에 설계도 저장
 
-			tileImage = CImageManager::Instance().GetImage("puzzle.png"); // 타일 이미지
-			pointImage = CImageManager::Instance().GetImage("pokecoin.png"); // 포인트 이미지
+			tileImage = CImageManager::Instance().GetImage("resource/puzzle.png"); // 타일 이미지
+			pointImage = CImageManager::Instance().GetImage("resource/pokecoin.png"); // 포인트 이미지
 
 			for (int i = 0; i < kTileY; i++) { // 맵 생성. i 는 y축, j는 x축
 				for (int j = 0; j < kTileX; j++) {
@@ -71,7 +71,7 @@ void CSceneManager::Init() {
 			m_pika->SetVector(&m_objects);
 			m_objects.push_back(pikaManager);
 
-			pikaImage = CImageManager::Instance().GetImage("pikachu.png");
+			pikaImage = CImageManager::Instance().GetImage("resource/pikachu.png");
 			pikaManager->AddComponent<CSprite>()->SetSprite(pikaImage);
 			pikaManager->GetComponent<CSprite>()->SetText("Player");
 			pikaManager->GetTransform()->x = 64;
@@ -82,7 +82,7 @@ void CSceneManager::Init() {
 
 			CObject *speedManager = new CObject(); // 스피드 업 생성
 			speedManager->AddComponent<CSpeed>();
-			speedImage = CImageManager::Instance().GetImage("razz-berry.png");
+			speedImage = CImageManager::Instance().GetImage("resource/razz-berry.png");
 			speedManager->AddComponent<CSprite>()->SetSprite(speedImage);
 			speedManager->GetTransform()->x = 64;
 			speedManager->GetTransform()->y = 64;

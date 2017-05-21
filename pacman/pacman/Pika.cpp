@@ -76,7 +76,7 @@ int CPika::Move(int _x, int _y) {
 void CPika::StateUpdate(State _state) {
 	std::string ImagePath;
 	if (_state != NORMAL) {
-		ALLEGRO_BITMAP *slideAnimation = al_load_bitmap((_state == ZZZ) ? "slide2.png" : "slide1.png");
+		ALLEGRO_BITMAP *slideAnimation = al_load_bitmap((_state == ZZZ) ? "resource/slide2.png" : "resource/slide1.png");
 		for (int i = 1088; i > -544;) {
 			al_draw_bitmap(slideAnimation, i, 0, 0);
 			al_flip_display();
@@ -85,13 +85,13 @@ void CPika::StateUpdate(State _state) {
 	}
 	switch (_state) {
 	case NORMAL:
-		ImagePath = "pikachu.png";
+		ImagePath = "resource/pikachu.png";
 		break;
 	case ZZZ:
-		ImagePath = "zzz.png";
+		ImagePath = "resource/zzz.png";
 		break;
 	case SPEED: 
-		ImagePath = "speed.png";
+		ImagePath = "resource/speed.png";
 		break;
 	}
 	CSprite *sprite = GetObject()->GetComponent<CSprite>();
