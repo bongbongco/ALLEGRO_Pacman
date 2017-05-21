@@ -15,7 +15,7 @@
 #include "Solid.h"
 #include "Rocket.h"
 #include "Pika.h"
-
+#include "Node.h"
 
 class CSceneManager : public CScene {
 private:

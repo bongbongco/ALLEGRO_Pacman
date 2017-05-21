@@ -19,6 +19,7 @@ void CSceneManager::Init() {
 	try {
 		if (al_init_image_addon()) {// 이미지 추가 기능 초기화 
 			m_blueprint = CMapManager::Instance().LoadLevel("level1.txt"); // 설계도 생성
+			CNode::Instance().SetBlueprint(m_blueprint); // 길 찾기를 위해 노드 객체에 설계도 저장
 
 			tileImage = CImageManager::Instance().GetImage("puzzle.png"); // 타일 이미지
 			pointImage = CImageManager::Instance().GetImage("pokecoin.png"); // 포인트 이미지
@@ -51,16 +52,17 @@ void CSceneManager::Init() {
 				CRocket *rocket = rocketManager->AddComponent<CRocket>();
 				rocket->SetLabel(i);
 				rocket->SetVector(&m_objects);
-				
+				rocket->SetSpeed(i);
+
 				rocketImage = CImageManager::Instance().GetImage(m_rocketImageName.at(i-1));
 				al_convert_mask_to_alpha(rocketImage, al_map_rgb(255, 255, 255));
 				rocketManager->AddComponent<CSprite>()->SetSprite(rocketImage);
 				
-				rocketManager->GetTransform()->x = kDisplayWidth / 5 + i * 128;
-				rocketManager->GetTransform()->y = 64;
-
-				CNode *result = CNode::Instance().FindPath(rocketManager->GetTransform()->x, 
-					rocketManager->GetTransform()->y, kDisplayWidth/2, kDisplayHeight/2, true);
+				rocketManager->GetTransform()->x = kDisplayWidth  - (i*256);
+				rocketManager->GetTransform()->y = 128 * i;
+				
+				rocket->SetNode(CNode::Instance().FindPath(rocketManager->GetTransform()->x,
+					rocketManager->GetTransform()->y, kDisplayWidth / 4, kDisplayHeight / 4, true));
 				m_objects.push_back(rocketManager);
 			}
 
@@ -72,8 +74,8 @@ void CSceneManager::Init() {
 			pikaImage = CImageManager::Instance().GetImage("pikachu.png");
 			pikaManager->AddComponent<CSprite>()->SetSprite(pikaImage);
 			pikaManager->GetComponent<CSprite>()->SetText("Player");
-			pikaManager->GetTransform()->x = kDisplayWidth / 2;
-			pikaManager->GetTransform()->y = kDisplayHeight / 2;
+			pikaManager->GetTransform()->x = 64;
+			pikaManager->GetTransform()->y = 128;
 
 			CControllManager::Instance().RegisterListener(m_pika);
 			
@@ -104,6 +106,8 @@ void CSceneManager::Init() {
 
 void CSceneManager::Update() {
 	for (int i = 0; i < m_objects.size(); i++) {
+		if(i==151)
+			m_objects[i]->Update();
 		m_objects[i]->Update();
 	}
 }

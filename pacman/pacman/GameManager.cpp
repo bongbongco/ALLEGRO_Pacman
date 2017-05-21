@@ -48,12 +48,22 @@ void CGameManager::Init() {
 
 	CSceneManager::Instance().Init(); // SceneManager 초기화
 }
-
-void CGameManager::Play() {
-
+void CGameManager::Intro() {
+	ALLEGRO_BITMAP *gameintroImage = al_load_bitmap("intro.png");
+	al_draw_bitmap(gameintroImage, 0, 0, 0);
+	al_flip_display();
 	while (true) {
 		m_whatHappen = al_wait_for_event_until(m_eventQueue, &m_event, &m_timeout); // 이벤트 큐에서 이벤트를 꺼내서 m_event에 삽입
-
+		if (m_whatHappen) {
+			if (m_event.type == ALLEGRO_EVENT_KEY_DOWN) // 키를 누른 경우
+				break;
+		}
+	}
+	return;
+}
+void CGameManager::Play() {
+	while (true) {
+		m_whatHappen = al_wait_for_event_until(m_eventQueue, &m_event, &m_timeout);
 		if (m_whatHappen) { // 이벤트 발생 시
 			if (m_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { // 창을 닫은 경우
 				break;
@@ -69,7 +79,17 @@ void CGameManager::Play() {
 			}
 		}
 	}
+	
+	End();
+}
+
+void CGameManager::End() {
+	ALLEGRO_BITMAP *gameoverImage = al_load_bitmap("gameover.png");
+	al_draw_bitmap(gameoverImage, 0, 0, 0);
+	al_flip_display();
+	al_rest(5.0);
 
 	al_destroy_display(m_display); // 디스플레이 제거
 	al_destroy_event_queue(m_eventQueue); // 이벤트 큐 제거
+	exit(EXIT_SUCCESS);
 }

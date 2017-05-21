@@ -1,6 +1,11 @@
 #include "Pika.h"
 #include "GameManager.h"
 
+void CPika::HealthCheck() {
+	if (m_life == 0) {
+		CGameManager::Instance().End();
+	}
+}
 
 void CPika::SetVector(std::vector<CObject *> *_object) {
 	m_otherObject = _object;
@@ -34,6 +39,10 @@ int CPika::Move(int _x, int _y) {
 				CRocket *rocket = (*m_otherObject)[i]->GetComponent<CRocket>();
 				if (rocket) { // 로켓단과의 충돌 시 스턴 발생
 					Stun();
+					m_life -= 1;
+					CSprite *sprite = GetObject()->GetComponent<CSprite>();
+					sprite->SetLife(m_life);
+					HealthCheck();
 				}
 			}
 
@@ -61,31 +70,43 @@ int CPika::Move(int _x, int _y) {
 
 	transform->x += _x;
 	transform->y += _y;
-SetDirectionRocket(transform->x, transform->y);
-return 1;
+	return 1;
 }
 
 void CPika::StateUpdate(State _state) {
-	ALLEGRO_BITMAP *slideAnimation = al_load_bitmap((_state == ZZZ) ? "slide2.png" : "slide1.png");
-	for (int i = 1088; i > -544;) {
-		al_draw_bitmap(slideAnimation, i, 0, 0);
-		al_flip_display();
-		i -= 26;
+	std::string ImagePath;
+	if (_state != NORMAL) {
+		ALLEGRO_BITMAP *slideAnimation = al_load_bitmap((_state == ZZZ) ? "slide2.png" : "slide1.png");
+		for (int i = 1088; i > -544;) {
+			al_draw_bitmap(slideAnimation, i, 0, 0);
+			al_flip_display();
+			i -= 4;
+		}
 	}
+	switch (_state) {
+	case NORMAL:
+		ImagePath = "pikachu.png";
+		break;
+	case ZZZ:
+		ImagePath = "zzz.png";
+		break;
+	case SPEED: 
+		ImagePath = "speed.png";
+		break;
+	}
+	CSprite *sprite = GetObject()->GetComponent<CSprite>();
+	ALLEGRO_BITMAP *pikaImage = CImageManager::Instance().GetImage(ImagePath.c_str());
+	al_convert_mask_to_alpha(pikaImage, al_map_rgb(255, 255, 255));
+	sprite->SetSprite(pikaImage);
 }
 
 void CPika::Stun() {
 	m_boostFlag = false;
 	m_speedBoostFrames = 0;
-	m_speedMod = 1; // Boost Mode 종료
+	m_speedMod = 2; // Boost Mode 종료
 	m_stunFlag = true;
 	m_stunFrames = kStunDuration;
 	StateUpdate(ZZZ);
-	CSprite *sprite = GetObject()->GetComponent<CSprite>();
-	ALLEGRO_BITMAP *pikaImage = CImageManager::Instance().GetImage("zzz.png");
-	al_convert_mask_to_alpha(pikaImage, al_map_rgb(255, 255, 255));
-	sprite->SetSprite(pikaImage);
-	al_flip_display();
 }
 
 void CPika::Boost() {
@@ -93,15 +114,11 @@ void CPika::Boost() {
 	m_speedMod = kBoostMod;
 	m_speedBoostFrames = kBoostDuration;
 	StateUpdate(SPEED);
-	CSprite *sprite = GetObject()->GetComponent<CSprite>();
-	ALLEGRO_BITMAP *pikaImage = CImageManager::Instance().GetImage("speed.png");
-	al_convert_mask_to_alpha(pikaImage, al_map_rgb(255, 255, 255));
-	sprite->SetSprite(pikaImage);
-	al_flip_display();
 }
 
 void CPika::Update() {
 	CTransform *transform = GetObject()->GetTransform();
+	SetDirectionRocket(transform->x, transform->y);
 
 	if (m_speedBoostFrames > 0) {
 		m_speedBoostFrames--;
@@ -109,12 +126,8 @@ void CPika::Update() {
 	else if (m_boostFlag && m_speedBoostFrames == 0) { // 부스터 모드 종료
 		m_boostFlag = false;
 		m_speedBoostFrames = 0;
-		m_speedMod = 1;
-		CSprite *sprite = GetObject()->GetComponent<CSprite>();
-		ALLEGRO_BITMAP *pikaImage = CImageManager::Instance().GetImage("pikachu.png");
-		al_convert_mask_to_alpha(pikaImage, al_map_rgb(255, 255, 255));
-		sprite->SetSprite(pikaImage);
-		al_flip_display();
+		m_speedMod = 2;
+		StateUpdate(NORMAL);
 	}
 
 	if (m_stunFrames > 0) {
@@ -124,11 +137,7 @@ void CPika::Update() {
 		if (m_stunFlag && m_stunFrames == 0) {
 			m_stunFrames = 0;
 			m_stunFlag = false;
-			CSprite *sprite = GetObject()->GetComponent<CSprite>();
-			ALLEGRO_BITMAP *pikaImage = CImageManager::Instance().GetImage("pikachu.png");
-			al_convert_mask_to_alpha(pikaImage, al_map_rgb(255, 255, 255));
-			sprite->SetSprite(pikaImage);
-			al_flip_display();
+			StateUpdate(NORMAL);
 		}
 		switch (m_direction) {
 		case N:
@@ -161,14 +170,12 @@ void CPika::Update() {
 }
 
 void CPika::SetDirectionRocket(int _x, int _y) {
-	for(int i = 0;  m_otherObject->size(); i++){
+	for (int i = 0; i < m_otherObject->size(); i++) {
 		CRocket *rocket = (*m_otherObject)[i]->GetComponent<CRocket>();
 		if (rocket) {
-			
-			CNode *result = CNode::Instance().FindPath((*m_otherObject)[i]->GetTransform()->x, (*m_otherObject)[i]->GetTransform()->y, _x, _y);
-			//rocket->SetDirection();
-			int j =0;
+			CTransform *rocketTransform = rocket->GetObject()->GetTransform();
+			rocket->SetNode(CNode::Instance().FindPath((*m_otherObject)[i]->GetTransform()->x, (*m_otherObject)[i]->GetTransform()->y, _x, _y));
+			rocket->Update();
 		}
 	}
-	
 }

@@ -1,2 +1,22 @@
-﻿  pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.exe
-  pacman.vcxproj -> E:\포트폴리오\ALLEGRO_Pacman\pacman\Debug\pacman.pdb (Partial PDB)
+﻿  Pika.cpp
+c:\git\allegro_pacman\pacman\pacman\object.h(18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\git\allegro_pacman\pacman\pacman\pika.cpp(23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\git\allegro_pacman\pacman\pacman\pika.cpp(173): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\git\allegro_pacman\pacman\pacman\object.h(47): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  c:\git\allegro_pacman\pacman\pacman\pika.cpp(35): note: 컴파일 중인 함수 템플릿 인스턴스화 'T *CObject::GetComponent<CSolid>(void)'에 대한 참조를 확인하십시오.
+          with
+          [
+              T=CSolid
+          ]
+  Node.cpp
+  ImageManager.cpp
+  코드를 생성하고 있습니다...
+  건너뛰고 있습니다... (관련된 변경 내용 없음)
+  Sprite.cpp
+  SceneManager.cpp
+  Rocket.cpp
+  Object.cpp
+  Main.cpp
+  GameManager.cpp
+  pacman.vcxproj -> C:\git\ALLEGRO_Pacman\pacman\Debug\pacman.exe
+  pacman.vcxproj -> C:\git\ALLEGRO_Pacman\pacman\Debug\pacman.pdb (Partial PDB)

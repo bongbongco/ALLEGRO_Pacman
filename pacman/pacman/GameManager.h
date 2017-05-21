@@ -42,7 +42,9 @@ public:
 	}
 
 	void Init();
+	void Intro();
 	void Play();
+	void End();
 	CSceneManager *GetSceneManager() {
 		return &m_sceneManager;
 	}

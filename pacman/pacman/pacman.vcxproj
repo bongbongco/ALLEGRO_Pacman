@@ -84,6 +84,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -147,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="ControllManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Pika.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -160,6 +165,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Solid.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Component.h" />

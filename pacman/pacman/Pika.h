@@ -10,6 +10,7 @@
 #include "Rocket.h"
 #include "Speed.h"
 #include "Point.h"
+#include "Node.h"
 #include <vector>
 #include <iostream>
 #include <string>
@@ -26,20 +27,21 @@ private:
 	std::vector<CObject *> *m_otherObject;
 	bool m_stunFlag;
 	bool m_boostFlag;
+	int m_life;
 public:
 	int m_score;
 	Direction m_direction;
-	
 
 	CPika(CObject *_object) : CComponent(_object) {
-		m_speedMod = 1;
+		m_speedMod = 2;
 		m_speedBoostFrames = 0;
 		m_otherObject = nullptr;
 		m_score = 0;
 		m_stunFrames = 0;
-		m_direction = E;
+		m_direction = W;
 		m_boostFlag = false;
 		m_stunFlag = false;
+		m_life = 3;
 	}
 	
 	int Move(int _x, int _y);
@@ -50,6 +52,8 @@ public:
 	void Stun();
 
 	void SetDirectionRocket(int _x, int _y);
+
+	void HealthCheck();
 
 	virtual void Update();
 	virtual void Render() {}
