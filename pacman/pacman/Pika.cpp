@@ -3,8 +3,13 @@
 
 void CPika::HealthCheck() {
 	if (m_life == 0) {
-		CGameManager::Instance().End();
+		CGameManager::Instance().Retry();
+
 	}
+}
+
+void CPika::StageClear() {
+	//nextgame
 }
 
 void CPika::SetVector(std::vector<CObject *> *_object) {
@@ -38,6 +43,9 @@ int CPika::Move(int _x, int _y) {
 			else {
 				CRocket *rocket = (*m_otherObject)[i]->GetComponent<CRocket>();
 				if (rocket) { // 로켓단과의 충돌 시 스턴 발생
+					if (m_stunFrames > 0) {
+						continue;
+					}
 					Stun();
 					m_life -= 1;
 					CSprite *sprite = GetObject()->GetComponent<CSprite>();
@@ -75,7 +83,7 @@ int CPika::Move(int _x, int _y) {
 
 void CPika::StateUpdate(State _state) {
 	std::string ImagePath;
-	if (_state != NORMAL) {
+	if (_state != NORMAL && _state != GRACE) {
 		ALLEGRO_BITMAP *slideAnimation = al_load_bitmap((_state == ZZZ) ? "resource/slide2.png" : "resource/slide1.png");
 		for (int i = 1088; i > -544;) {
 			al_draw_bitmap(slideAnimation, i, 0, 0);
@@ -90,8 +98,11 @@ void CPika::StateUpdate(State _state) {
 	case ZZZ:
 		ImagePath = "resource/zzz.png";
 		break;
-	case SPEED: 
+	case SPEED:
 		ImagePath = "resource/speed.png";
+		break;
+	case GRACE:
+		ImagePath = "resource/pokeball.png";
 		break;
 	}
 	CSprite *sprite = GetObject()->GetComponent<CSprite>();
@@ -130,13 +141,21 @@ void CPika::Update() {
 		StateUpdate(NORMAL);
 	}
 
-	if (m_stunFrames > 0) {
+	if (m_stunFrames >= 150) {
 		m_stunFrames--; // 스턴 중일 경우 스턴 기간 감소 
+		if (m_stunFrames == 150) {
+			StateUpdate(GRACE);
+			m_speedMod = kBoostMod;
+		}
 	}
 	else { // 스턴 중이 아닐 경우 움직임
-		if (m_stunFlag && m_stunFrames == 0) {
+		if (m_stunFrames > 0) {
+			m_stunFrames--;
+		}
+		else if (m_stunFlag && m_stunFrames == 0) {
 			m_stunFrames = 0;
 			m_stunFlag = false;
+			m_speedMod = 2;
 			StateUpdate(NORMAL);
 		}
 		switch (m_direction) {

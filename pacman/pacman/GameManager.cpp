@@ -85,6 +85,13 @@ void CGameManager::Play() {
 	End();
 }
 
+void CGameManager::Retry() {
+	al_destroy_display(m_display); // 디스플레이 제거
+	al_destroy_event_queue(m_eventQueue); // 이벤트 큐 제거
+	Init();
+	Play();
+}
+
 void CGameManager::End() {
 	ALLEGRO_BITMAP *gameoverImage = al_load_bitmap("resource/gameover.png");
 	al_draw_bitmap(gameoverImage, 0, 0, 0);

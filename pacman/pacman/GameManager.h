@@ -44,6 +44,7 @@ public:
 	void Init();
 	void Intro();
 	void Play();
+	void Retry();
 	void End();
 	CSceneManager *GetSceneManager() {
 		return &m_sceneManager;

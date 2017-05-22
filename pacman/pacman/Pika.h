@@ -24,6 +24,7 @@ private:
 	int m_stunFrames;
 	int m_speedMod;
 	int m_speedBoostFrames;
+	int m_graceFrames;
 	std::vector<CObject *> *m_otherObject;
 	bool m_stunFlag;
 	bool m_boostFlag;
@@ -38,6 +39,7 @@ public:
 		m_otherObject = nullptr;
 		m_score = 0;
 		m_stunFrames = 0;
+		m_graceFrames = 0;
 		m_direction = W;
 		m_boostFlag = false;
 		m_stunFlag = false;
@@ -50,6 +52,7 @@ public:
 	void StateUpdate(State _state);
 	void Boost();
 	void Stun();
+	void StageClear();
 
 	void SetDirectionRocket(int _x, int _y);
 
