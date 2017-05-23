@@ -55,6 +55,11 @@ void CGameManager::Intro() {
 	while (true) {
 		m_whatHappen = al_wait_for_event_until(m_eventQueue, &m_event, &m_timeout); // 이벤트 큐에서 이벤트를 꺼내서 m_event에 삽입
 		if (m_whatHappen) {
+			if (m_event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { // 창을 닫은 경우
+				al_destroy_display(m_display); // 디스플레이 제거
+				al_destroy_event_queue(m_eventQueue); // 이벤트 큐 제거
+				exit(EXIT_SUCCESS);
+			}
 			if (m_event.type == ALLEGRO_EVENT_KEY_DOWN) // 키를 누른 경우
 				break;
 		}

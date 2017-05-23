@@ -28,7 +28,6 @@ private:
 	std::vector<CObject *> *m_otherObject;
 	bool m_stunFlag;
 	bool m_boostFlag;
-	int m_life;
 public:
 	int m_score;
 	Direction m_direction;
@@ -36,14 +35,13 @@ public:
 	CPika(CObject *_object) : CComponent(_object) {
 		m_speedMod = 2;
 		m_speedBoostFrames = 0;
-		m_otherObject = nullptr;
+		m_otherObject->resize(1000);
 		m_score = 0;
 		m_stunFrames = 0;
 		m_graceFrames = 0;
 		m_direction = W;
 		m_boostFlag = false;
 		m_stunFlag = false;
-		m_life = 3;
 	}
 	
 	int Move(int _x, int _y);
@@ -52,12 +50,10 @@ public:
 	void StateUpdate(State _state);
 	void Boost();
 	void Stun();
-	void StageClear();
+	void Respawn();
 
 	void SetDirectionRocket(int _x, int _y);
-
-	void HealthCheck();
-
+	
 	virtual void Update();
 	virtual void Render() {}
 

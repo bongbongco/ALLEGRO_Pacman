@@ -1,19 +1,40 @@
 #include "Pika.h"
 #include "GameManager.h"
 
-void CPika::HealthCheck() {
-	if (m_life == 0) {
-		CGameManager::Instance().Retry();
 
+void CPika::Respawn() { // 포인트 재생성
+	int **blueprint = CSceneManager::Instance().GetBlueprint(); // 설계도 불러오기
+
+	for (int i = 0; i < kTileY; i++) { // 맵 생성. i 는 y축, j는 x축
+		for (int j = 0; j < kTileX; j++) {
+			if (blueprint[i][j] == kPoint) {  // 포인트
+				CObject *pointManager = new CObject();
+				pointManager->AddComponent<CPoint>();
+
+				pointManager->AddComponent<CSprite>()->SetSprite(CImageManager::Instance().GetImage("resource/pokecoin.png"));
+				pointManager->GetTransform()->y = i * 64;
+				pointManager->GetTransform()->x = j * 64;
+				CSceneManager::Instance().CreateObject(pointManager);
+			}
+		}
 	}
-}
+	CObject *speedManager = new CObject(); // 스피드 업 생성
+	speedManager->AddComponent<CSpeed>();
+	speedManager->AddComponent<CSprite>()->SetSprite(CImageManager::Instance().GetImage("resource/razz-berry.png"));
+	speedManager->GetTransform()->x = 64;
+	speedManager->GetTransform()->y = 64;
+	CSceneManager::Instance().CreateObject(speedManager);
 
-void CPika::StageClear() {
-	//nextgame
+	speedManager = new CObject(); // 스피드 업 생성
+	speedManager->AddComponent<CSpeed>();
+	speedManager->AddComponent<CSprite>()->SetSprite(CImageManager::Instance().GetImage("resource/razz-berry.png"));
+	speedManager->GetTransform()->x = kDisplayWidth / 2;
+	speedManager->GetTransform()->y = 256;
+	CSceneManager::Instance().CreateObject(speedManager);
 }
 
 void CPika::SetVector(std::vector<CObject *> *_object) {
-	m_otherObject = _object;
+	m_otherObject = _object; // 오브젝트 정보
 }
 
 int CPika::Move(int _x, int _y) {
@@ -37,37 +58,36 @@ int CPika::Move(int _x, int _y) {
 			(y < otherTransform->y + otherTransform->height) // 동일 좌표 위에 존재하는 객체 존재 시
 			) {
 
-			if ((*m_otherObject)[i]->GetComponent<CSolid>()) {
-				return 0; // 벽
+			if ((*m_otherObject)[i]->GetComponent<CSolid>()) { // 벽
+				return 0; 
 			}
 			else {
 				CRocket *rocket = (*m_otherObject)[i]->GetComponent<CRocket>();
 				if (rocket) { // 로켓단과의 충돌 시 스턴 발생
-					if (m_stunFrames > 0) {
+					if (m_stunFrames > 0) { // 스턴 중에 다시 스턴 발생 방지
 						continue;
 					}
 					Stun();
-					m_life -= 1;
-					CSprite *sprite = GetObject()->GetComponent<CSprite>();
-					sprite->SetLife(m_life);
-					HealthCheck();
 				}
 			}
 
 			CPoint *point = m_otherObject->at(i)->GetComponent<CPoint>();
 
-			if (point) {
+			if (point) { // 포인트
 				CObject *pointManager = m_otherObject->at(i);
 				CGameManager::Instance().GetSceneManager()->RemoveObject(pointManager); // 포인트 제거
 				m_otherObject->erase(m_otherObject->begin() + i);
 				m_score += 10;
+				if (m_score%1050 == 0) { // 모든 포인트 획득 시
+					Respawn();
+				}
 				CSprite *sprite = GetObject()->GetComponent<CSprite>();
-				sprite->SetScore(m_score);
+				sprite->SetScore(m_score); // 화면에 점수 반영
 			}
 
 			CSpeed *speed = m_otherObject->at(i)->GetComponent<CSpeed>();
 
-			if (speed) {
+			if (speed) { // 부스터
 				CObject *speedManager = m_otherObject->at(i);
 				CGameManager::Instance().GetSceneManager()->RemoveObject(speedManager); // 스피드 업 제거
 				m_otherObject->erase(m_otherObject->begin() + i);
@@ -81,7 +101,7 @@ int CPika::Move(int _x, int _y) {
 	return 1;
 }
 
-void CPika::StateUpdate(State _state) {
+void CPika::StateUpdate(State _state) { // 캐릭터 상태 변경 및 슬라이드 애니메이션 효과
 	std::string ImagePath;
 	if (_state != NORMAL && _state != GRACE) {
 		ALLEGRO_BITMAP *slideAnimation = al_load_bitmap((_state == ZZZ) ? "resource/slide2.png" : "resource/slide1.png");
@@ -111,7 +131,7 @@ void CPika::StateUpdate(State _state) {
 	sprite->SetSprite(pikaImage);
 }
 
-void CPika::Stun() {
+void CPika::Stun() { // 스턴 시작
 	m_boostFlag = false;
 	m_speedBoostFrames = 0;
 	m_speedMod = 2; // Boost Mode 종료
@@ -120,7 +140,7 @@ void CPika::Stun() {
 	StateUpdate(ZZZ);
 }
 
-void CPika::Boost() {
+void CPika::Boost() { // 부스터 모드 시작
 	m_boostFlag = true;
 	m_speedMod = kBoostMod;
 	m_speedBoostFrames = kBoostDuration;
@@ -132,7 +152,7 @@ void CPika::Update() {
 	SetDirectionRocket(transform->x, transform->y);
 
 	if (m_speedBoostFrames > 0) {
-		m_speedBoostFrames--;
+		m_speedBoostFrames--; // 부스터 모드인 경우 부스터 기간 감소
 	}
 	else if (m_boostFlag && m_speedBoostFrames == 0) { // 부스터 모드 종료
 		m_boostFlag = false;
@@ -188,7 +208,7 @@ void CPika::Update() {
 	}
 }
 
-void CPika::SetDirectionRocket(int _x, int _y) {
+void CPika::SetDirectionRocket(int _x, int _y) { // 피카츄 움직임에 따른 로켓단 방향 설정
 	for (int i = 0; i < m_otherObject->size(); i++) {
 		CRocket *rocket = (*m_otherObject)[i]->GetComponent<CRocket>();
 		if (rocket) {

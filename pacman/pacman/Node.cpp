@@ -3,9 +3,9 @@
 
 CNode *CNode::FindPath(int _startX, int _startY, int _targetX, int _targetY, bool _first) {
 	m_openList = new CNode[kMax];
-	m_closeList = new CNode **[kTileY + 1];
+	m_closeList = new CNode **[kTileY + 1]; // Y
 	for (int i = 0; i <= kTileY; i++) {
-		m_closeList[i] = new CNode*[kTileX + 1];
+		m_closeList[i] = new CNode*[kTileX + 1]; // X
 		for (int j = 0; j < kTileX; j++) {
 			m_closeList[i][j] = nullptr;
 		}
@@ -13,8 +13,8 @@ CNode *CNode::FindPath(int _startX, int _startY, int _targetX, int _targetY, boo
 
 		CNode *newNode = new CNode;
 
-		_startX = _startX / kTileWidth;
-		_startY = _startY / kTileHeight;
+		_startX = _startX / kTileWidth; // 좌표/타일 너비(64)
+		_startY = _startY / kTileHeight; // 좌표/타일 높이(64)
 		_targetX = _targetX / kTileWidth;
 		_targetY = _targetY / kTileHeight;
 
@@ -51,13 +51,13 @@ CNode *CNode::FindPath(int _startX, int _startY, int _targetX, int _targetY, boo
 		int movingX = newParent->m_x;
 		int movingY = newParent->m_y;
 		
-		//12시 - 이동 가중치 10
+		//N - 이동 가중치 10
 		MakeNode(newParent, 10, movingX, movingY - 1);
-		//3시 - 이동 가중치 10
+		//E - 이동 가중치 10
 		MakeNode(newParent, 10, movingX + 1, movingY);
-		//6시 - 이동 가중치 10
+		//S - 이동 가중치 10
 		MakeNode(newParent, 10, movingX, movingY + 1);
-		//9시 - 이동 가중치 10
+		//W - 이동 가중치 10
 		MakeNode(newParent, 10, movingX - 1, movingY);
 	}
 	return nullptr;

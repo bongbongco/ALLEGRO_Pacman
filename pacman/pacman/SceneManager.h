@@ -38,5 +38,7 @@ public:
 	virtual void Update();
 	virtual void Render();
 
+	void CreateObject(CObject *_object);
 	int RemoveObject(CObject *_object);
+	int **GetBlueprint();
 };

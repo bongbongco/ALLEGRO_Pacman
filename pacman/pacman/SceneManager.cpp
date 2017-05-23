@@ -121,7 +121,7 @@ void CSceneManager::Render() {
 	al_flip_display(); // 화면에 적용
 }
 
-int CSceneManager::RemoveObject(CObject *_object) {
+int CSceneManager::RemoveObject(CObject *_object) { // 피카츄와 충돌에 의한 오브젝트 제거
 	for (int i = 0; m_objects.size(); i++) {
 		if (m_objects[i] == _object) {
 			m_objects.erase(m_objects.begin() + i);
@@ -130,4 +130,12 @@ int CSceneManager::RemoveObject(CObject *_object) {
 	}
 	delete _object;
 	return 0;
+}
+
+void CSceneManager::CreateObject(CObject *_object) { // Respawn에 의한 오브젝트 생성
+	m_objects.push_back(_object);
+}
+
+int **CSceneManager::GetBlueprint() { // 설계도 반환
+	return m_blueprint;
 }

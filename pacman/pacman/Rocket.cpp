@@ -34,7 +34,7 @@ void CRocket::SetNode(CNode *_telescope) {
 
 		while (m_telescope->m_parent != NULL) {
 			child = m_telescope;
-			m_telescope = m_telescope->m_parent;
+			m_telescope = m_telescope->m_parent; // 다음 움직일 방향 결정
 			if (m_telescope->m_x == sourceX && m_telescope->m_y == sourceY) {
 				int targetX = child->m_x;
 				int targetY = child->m_y;
