@@ -35,7 +35,7 @@ public:
 	CPika(CObject *_object) : CComponent(_object) {
 		m_speedMod = 2;
 		m_speedBoostFrames = 0;
-		m_otherObject->resize(1000);
+		m_otherObject = nullptr;
 		m_score = 0;
 		m_stunFrames = 0;
 		m_graceFrames = 0;
@@ -47,7 +47,7 @@ public:
 	int Move(int _x, int _y);
 	void SetVector(std::vector<CObject *> *_objects);
 
-	void StateUpdate(State _state);
+	void StateUpdate(State _state, CSprite *_sprite);
 	void Boost();
 	void Stun();
 	void Respawn();

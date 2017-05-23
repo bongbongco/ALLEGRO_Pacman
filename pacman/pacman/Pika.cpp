@@ -3,34 +3,21 @@
 
 
 void CPika::Respawn() { // 포인트 재생성
-	int **blueprint = CSceneManager::Instance().GetBlueprint(); // 설계도 불러오기
+	for (int i = 0; i < m_otherObject->size(); i++) {
+		CPoint *point = m_otherObject->at(i)->GetComponent<CPoint>();
+		if (point) {
+			CObject *pointManager = m_otherObject->at(i);
+			point->state = true;
+			StateUpdate(COIN, pointManager->GetComponent<CSprite>());
+		}
 
-	for (int i = 0; i < kTileY; i++) { // 맵 생성. i 는 y축, j는 x축
-		for (int j = 0; j < kTileX; j++) {
-			if (blueprint[i][j] == kPoint) {  // 포인트
-				CObject *pointManager = new CObject();
-				pointManager->AddComponent<CPoint>();
-
-				pointManager->AddComponent<CSprite>()->SetSprite(CImageManager::Instance().GetImage("resource/pokecoin.png"));
-				pointManager->GetTransform()->y = i * 64;
-				pointManager->GetTransform()->x = j * 64;
-				CSceneManager::Instance().CreateObject(pointManager);
-			}
+		CSpeed *speed = m_otherObject->at(i)->GetComponent<CSpeed>();
+		if (speed) {
+			CObject *speedManager = m_otherObject->at(i);
+			speed->state = true;
+			StateUpdate(BOOST, speedManager->GetComponent<CSprite>());
 		}
 	}
-	CObject *speedManager = new CObject(); // 스피드 업 생성
-	speedManager->AddComponent<CSpeed>();
-	speedManager->AddComponent<CSprite>()->SetSprite(CImageManager::Instance().GetImage("resource/razz-berry.png"));
-	speedManager->GetTransform()->x = 64;
-	speedManager->GetTransform()->y = 64;
-	CSceneManager::Instance().CreateObject(speedManager);
-
-	speedManager = new CObject(); // 스피드 업 생성
-	speedManager->AddComponent<CSpeed>();
-	speedManager->AddComponent<CSprite>()->SetSprite(CImageManager::Instance().GetImage("resource/razz-berry.png"));
-	speedManager->GetTransform()->x = kDisplayWidth / 2;
-	speedManager->GetTransform()->y = 256;
-	CSceneManager::Instance().CreateObject(speedManager);
 }
 
 void CPika::SetVector(std::vector<CObject *> *_object) {
@@ -74,9 +61,13 @@ int CPika::Move(int _x, int _y) {
 			CPoint *point = m_otherObject->at(i)->GetComponent<CPoint>();
 
 			if (point) { // 포인트
+				if (!point->state) {
+					continue;
+				}
 				CObject *pointManager = m_otherObject->at(i);
-				CGameManager::Instance().GetSceneManager()->RemoveObject(pointManager); // 포인트 제거
-				m_otherObject->erase(m_otherObject->begin() + i);
+				point->state = false;
+				StateUpdate(BLANK, pointManager->GetComponent<CSprite>());
+				
 				m_score += 10;
 				if (m_score%1050 == 0) { // 모든 포인트 획득 시
 					Respawn();
@@ -88,9 +79,12 @@ int CPika::Move(int _x, int _y) {
 			CSpeed *speed = m_otherObject->at(i)->GetComponent<CSpeed>();
 
 			if (speed) { // 부스터
+				if (!speed->state) {
+					continue;
+				}
 				CObject *speedManager = m_otherObject->at(i);
-				CGameManager::Instance().GetSceneManager()->RemoveObject(speedManager); // 스피드 업 제거
-				m_otherObject->erase(m_otherObject->begin() + i);
+				speed->state = false;
+				StateUpdate(BLANK, speedManager->GetComponent<CSprite>());
 				Boost();
 			}
 		}
@@ -101,9 +95,9 @@ int CPika::Move(int _x, int _y) {
 	return 1;
 }
 
-void CPika::StateUpdate(State _state) { // 캐릭터 상태 변경 및 슬라이드 애니메이션 효과
+void CPika::StateUpdate(State _state, CSprite *_sprite) { // 캐릭터 상태 변경 및 슬라이드 애니메이션 효과
 	std::string ImagePath;
-	if (_state != NORMAL && _state != GRACE) {
+	if (_state == ZZZ || _state == SPEED) {
 		ALLEGRO_BITMAP *slideAnimation = al_load_bitmap((_state == ZZZ) ? "resource/slide2.png" : "resource/slide1.png");
 		for (int i = 1088; i > -544;) {
 			al_draw_bitmap(slideAnimation, i, 0, 0);
@@ -124,11 +118,19 @@ void CPika::StateUpdate(State _state) { // 캐릭터 상태 변경 및 슬라이드 애니메이
 	case GRACE:
 		ImagePath = "resource/pokeball.png";
 		break;
+	case BLANK:
+		ImagePath = "resource/blank.png";
+		break;
+	case COIN:
+		ImagePath = "resource/pokecoin.png";
+		break;
+	case BOOST:
+		ImagePath = "resource/razz-berry.png";
+		break;
 	}
-	CSprite *sprite = GetObject()->GetComponent<CSprite>();
-	ALLEGRO_BITMAP *pikaImage = CImageManager::Instance().GetImage(ImagePath.c_str());
-	al_convert_mask_to_alpha(pikaImage, al_map_rgb(255, 255, 255));
-	sprite->SetSprite(pikaImage);
+	ALLEGRO_BITMAP *Image = CImageManager::Instance().GetImage(ImagePath.c_str());
+	al_convert_mask_to_alpha(Image, al_map_rgb(255, 255, 255));
+	_sprite->SetSprite(Image);
 }
 
 void CPika::Stun() { // 스턴 시작
@@ -137,14 +139,14 @@ void CPika::Stun() { // 스턴 시작
 	m_speedMod = 2; // Boost Mode 종료
 	m_stunFlag = true;
 	m_stunFrames = kStunDuration;
-	StateUpdate(ZZZ);
+	StateUpdate(ZZZ, GetObject()->GetComponent<CSprite>());
 }
 
 void CPika::Boost() { // 부스터 모드 시작
 	m_boostFlag = true;
 	m_speedMod = kBoostMod;
 	m_speedBoostFrames = kBoostDuration;
-	StateUpdate(SPEED);
+	StateUpdate(SPEED, GetObject()->GetComponent<CSprite>());
 }
 
 void CPika::Update() {
@@ -158,13 +160,13 @@ void CPika::Update() {
 		m_boostFlag = false;
 		m_speedBoostFrames = 0;
 		m_speedMod = 2;
-		StateUpdate(NORMAL);
+		StateUpdate(NORMAL, GetObject()->GetComponent<CSprite>());
 	}
 
 	if (m_stunFrames >= 150) {
 		m_stunFrames--; // 스턴 중일 경우 스턴 기간 감소 
 		if (m_stunFrames == 150) {
-			StateUpdate(GRACE);
+			StateUpdate(GRACE, GetObject()->GetComponent<CSprite>());
 			m_speedMod = kBoostMod;
 		}
 	}
@@ -176,7 +178,7 @@ void CPika::Update() {
 			m_stunFrames = 0;
 			m_stunFlag = false;
 			m_speedMod = 2;
-			StateUpdate(NORMAL);
+			StateUpdate(NORMAL, GetObject()->GetComponent<CSprite>());
 		}
 		switch (m_direction) {
 		case N:

@@ -6,7 +6,7 @@
 
 
 enum Direction {N, S, W, E}; // 방향 - 위, 아래, 왼쪽, 오른쪽
-enum State {ZZZ, SPEED, NORMAL, GRACE}; // 상태 - 스턴, 부스터, 보통, 무적
+enum State {ZZZ, SPEED, NORMAL, GRACE, BLANK, COIN, BOOST}; // 상태 - 스턴, 부스터, 보통, 무적, 빈
 const int kDisplayWidth = 1088; // 화면 가로 폭
 const int kDisplayHeight = 704; // 화면 세로 폭
 const int kTileX = 17; // 가로 타일 수

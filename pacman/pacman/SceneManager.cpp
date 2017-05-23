@@ -47,6 +47,21 @@ void CSceneManager::Init() {
 				}
 			}
 
+			CObject *speedManager = new CObject(); // 스피드 업 생성
+			speedManager->AddComponent<CSpeed>();
+			speedImage = CImageManager::Instance().GetImage("resource/razz-berry.png");
+			speedManager->AddComponent<CSprite>()->SetSprite(speedImage);
+			speedManager->GetTransform()->x = 64;
+			speedManager->GetTransform()->y = 64;
+			m_objects.push_back(speedManager);
+
+			speedManager = new CObject(); // 스피드 업 생성
+			speedManager->AddComponent<CSpeed>();
+			speedManager->AddComponent<CSprite>()->SetSprite(speedImage);
+			speedManager->GetTransform()->x = kDisplayWidth / 2;
+			speedManager->GetTransform()->y = 256;
+			m_objects.push_back(speedManager);
+
 			for (int i = 1; i <= kRocketNumber; i++) { // 로켓단 생성
 				CObject *rocketManager = new CObject;
 				CRocket *rocket = rocketManager->AddComponent<CRocket>();
@@ -78,22 +93,7 @@ void CSceneManager::Init() {
 			pikaManager->GetTransform()->y = 128;
 
 			CControllManager::Instance().RegisterListener(m_pika);
-			
 
-			CObject *speedManager = new CObject(); // 스피드 업 생성
-			speedManager->AddComponent<CSpeed>();
-			speedImage = CImageManager::Instance().GetImage("resource/razz-berry.png");
-			speedManager->AddComponent<CSprite>()->SetSprite(speedImage);
-			speedManager->GetTransform()->x = 64;
-			speedManager->GetTransform()->y = 64;
-			m_objects.push_back(speedManager);
-
-			speedManager = new CObject(); // 스피드 업 생성
-			speedManager->AddComponent<CSpeed>();
-			speedManager->AddComponent<CSprite>()->SetSprite(speedImage);
-			speedManager->GetTransform()->x = kDisplayWidth / 2;
-			speedManager->GetTransform()->y = 256;
-			m_objects.push_back(speedManager);
 		}
 		else {
 			throw kAllegroImageInitError;
@@ -130,10 +130,6 @@ int CSceneManager::RemoveObject(CObject *_object) { // 피카츄와 충돌에 의한 오브
 	}
 	delete _object;
 	return 0;
-}
-
-void CSceneManager::CreateObject(CObject *_object) { // Respawn에 의한 오브젝트 생성
-	m_objects.push_back(_object);
 }
 
 int **CSceneManager::GetBlueprint() { // 설계도 반환

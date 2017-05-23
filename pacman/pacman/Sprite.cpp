@@ -29,7 +29,7 @@ void CSprite::Render() {
 	if (m_text[0] != '0') { // 점수 출력
 		std::string test = "Score : " + std::to_string(m_score);
 		const char* tmp = test.c_str();
-		al_draw_text(m_font, al_map_rgb(255, 255, 102), transform->x, transform->y - 32, ALLEGRO_ALIGN_LEFT, "Player");
+		al_draw_text(m_font, al_map_rgb(255, 255, 102), transform->x -8, transform->y - 32, ALLEGRO_ALIGN_LEFT, "Player");
 		al_draw_text(m_font, al_map_rgb(255, 000, 000), 1040, 5, ALLEGRO_ALIGN_RIGHT, tmp);
 	}
 }

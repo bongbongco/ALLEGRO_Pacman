@@ -17,7 +17,7 @@ public:
 	int m_f; // 현재 타일까지 총 이동 비용
 	int m_g; // 출발점부터 현재 노드까지 이동 비용
 	int m_h; // 현재 노트부터 목적지까지 이동 비용
-	const int kMax = 9999;
+	const int kMax = 1000;
 	Direction m_direction; // 방향
 	CNode *m_openList;// = new CNode;
 	CNode ***m_closeList;// [kTileY + 1][kTileX + 1];
